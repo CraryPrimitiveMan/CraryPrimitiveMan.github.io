@@ -1,0 +1,25 @@
+{
+  "name": "ColorNamer",
+  "version": "0.0.1",
+  "homepage": "https://github.com/CraryPrimitiveMan/ColorNamer",
+  "authors": [
+    "Harry Sun <harrysun@augmentum.com.cn>"
+  ],
+  "description": "Name a color",
+  "keywords": [
+    "color",
+    "name"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "colpick": "2.0.2",
+    "jquery": "2.1.3"
+  }
+}
