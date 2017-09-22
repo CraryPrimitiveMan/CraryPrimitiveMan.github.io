@@ -410,7 +410,7 @@ OnDOMReady(function()
             S(thistag).fontSize       = '50%'
 
             Html(thistag, Html(thistag) +
-               InsVars("<a href="#cite#1">[#1]</a>", cindex))
+               InsVars("<a href='#cite#1'>[#1]</a>", cindex))
          } )
       }
 
@@ -454,7 +454,8 @@ OnDOMReady(function()
          Html(thistag, Html(thistag).replace(/\[\[([^\]]*)\]\]/g,
             function()
          {
-            arguments[1] = arguments[1].replace(/&lt;/g, '<') arguments[1]="arguments[1].replace(/&gt;/g," '="">')
+            arguments[1] = arguments[1].replace(/&lt;/g, '<')
+            arguments[1] = arguments[1].replace(/&gt;/g, '>')
 
             try
             {
@@ -462,7 +463,7 @@ OnDOMReady(function()
             }
             catch(e)
             {
-               return "<span class="red">[" + e + "]</span>"
+               return "<span class='red'>[" + e + "]</span>"
             }
          } ))
       }
@@ -535,7 +536,7 @@ OnDOMReady(function()
       var html = '<ol>'
 
       for (index = 0 ; index < cindex ; ++index)
-         html += InsVars('<a name="cite#1"></a><li>#2</li>',
+         html += InsVars('<a name=cite#1></a><li>#2</li>',
             index + 1, cites[index])
 
       // Check that 'citations' exists before inserting HTML
@@ -595,11 +596,10 @@ function loadsclasses(sclasses)
 
    You can add more classes to your HTML using meta tags, like this...
 
-<meta http-equiv="sclass" name="clickable" content="nooutline pointer">
+<meta http-equiv='sclass' name='clickable' content='nooutline pointer' />
 
    which replicates one of the superclasses built into this script. You
    can override it, or add more superclasses with new names and values.
    You can also add them to this file using the syntax shown above.
 
 ************************************************************************/
-</')>

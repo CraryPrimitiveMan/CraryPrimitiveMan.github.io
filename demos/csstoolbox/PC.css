@@ -1110,7 +1110,8 @@
 .brackets:after,  .brackets_h:hover:after  { content:']'; }
 .braces:before,   .braces_h:hover:before   { content:'{'; }
 .braces:after,    .braces_h:hover:after    { content:'}'; }
-.chevrons:before, .chevrons_h:hover:before { content:'<'; }="" .chevrons:after,="" .chevrons_h:hover:after="" {="" content:'="">'; }
+.chevrons:before, .chevrons_h:hover:before { content:'<'; }
+.chevrons:after,  .chevrons_h:hover:after  { content:'>'; }
 
 /* 28: Google Fonts */
 
@@ -2264,4 +2265,3 @@
 /*  58 - 100: See the file PC.js  */
 /**********************************/
 
-</';>

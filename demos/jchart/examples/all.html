@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../lib/d3.min.js"></script>
+        <script type="text/javascript" src="../jChart.js"></script>
+    </head>
+    <body>
+        <div id="bar" style="float: left;"></div>
+        <div id="line" style="float: left;"></div>
+        <div id="doughnut" style="float: left;"></div>
+        <div id="pie" style="float: left;"></div>
+        <div id="polarArea" style="float: left;"></div>
+    </body>
+    <script type="text/javascript">
+        var normalData = [
+            {
+                key : 1,
+                value : 10
+            },
+            {
+                key : 2,
+                value : 130
+            },
+            {
+                key : 3,
+                value : 10
+            },
+            {
+                key : 4,
+                value : 50
+            },
+            {
+                key : 5,
+                value : 120
+            },
+            {
+                key : 6,
+                value : 30
+            },
+        ];
+
+        var barData = [
+            {
+                text : 1,
+                value : 10
+            },
+            {
+                text : 2,
+                value : 30
+            },
+            {
+                text : 3,
+                value : 10
+            },
+            {
+                text : 4,
+                value : 50
+            },
+            {
+                text : 5,
+                value : 20
+            },
+            {
+                text : 6,
+                value : 30
+            },
+            {
+                text : 7,
+                value : 30
+            },
+            {
+                text : 8,
+                value : 10
+            },
+            {
+                text : 9,
+                value : 50
+            },
+            {
+                text : 10,
+                value : 20
+            },
+            {
+                text : 11,
+                value : 30
+            }
+        ];
+
+        var lineData = [
+            {date: "30-Apr-12", value: 583.98},
+            {date: "27-Apr-12", value: 603.00},
+            {date: "26-Apr-12", value: 607.70},
+            {date: "25-Apr-12", value: 610.00},
+            {date: "24-Apr-12", value: 560.28},
+            {date: "23-Apr-12", value: 571.70},
+            {date: "20-Apr-12", value: 572.98},
+            {date: "19-Apr-12", value: 587.44},
+            {date: "18-Apr-12", value: 608.34},
+            {date: "17-Apr-12", value: 609.70},
+            {date: "16-Apr-12", value: 580.13},
+            {date: "13-Apr-12", value: 605.23},
+            {date: "12-Apr-12", value: 622.77},
+            {date: "11-Apr-12", value: 626.20},
+            {date: "10-Apr-12", value: 628.44}
+        ];
+
+        var options = {
+            field : {
+                textField: "date"
+            }
+        };
+
+        var bar = jc.Bar("#bar", barData);
+        bar.initChart();
+
+        var doughnut = jc.Doughnut("#doughnut", normalData);
+        doughnut.initChart();
+
+        var pie = jc.Pie("#pie", normalData);
+        pie.initChart();
+
+        var line = jc.Line("#line", lineData, options);
+        line.initChart();
+
+        var polarArea = jc.PolarArea("#polarArea", normalData);
+        polarArea.initChart();
+    </script>
+</html>

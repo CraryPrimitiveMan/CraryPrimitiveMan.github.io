@@ -562,7 +562,108 @@ function Fade(id, start, end, msecs, interruptible, CB)
       O(id).FA_Level += O(id).FA_Step
 
       if (O(id).FA_Level >= Math.max(O(id).FA_Start, O(id).FA_End) ||
-          O(id).FA_Level <= math.min(o(id).fa_start,="" o(id).fa_end))="" {="" o(id).fa_level="O(id).FA_End" o(id).fa_flag="false" clearinterval(o(id).fa_iid)="" if="" (typeof="" cb="" !="UNDEF)" eval(cb)="" }="" opacity(id,="" o(id).fa_level)="" function="" fadeout(id,="" msecs,="" interruptible,="" cb)="" fade(id,="" 100,="" 0,="" fadein(id,="" fadetoggle(id,="" (id="" instanceof="" array)="" for="" (var="" j="0" ;="" <="" id.length="" ++j)="" fadetoggle(id[j],="" return="" (o(id).fadeout)="" fadein(="" id,="" else="" fadebetween(id1,="" id2,="" fadeout(id1,="" hide(id,="" s(id,="" 'display',="" 'none')="" o(id,="" 'hi_flag',="" true)="" show(id,="" 'block')="" false)="" hidetoggle(id,="" hidetoggle(id[j],="" (s(id).display="" )="" slide(id,="" frx,="" fry,="" tox,="" toy,="" (o(id).sl_flag)="" (!o(id).sl_int)="" clearinterval(o(id).sl_iid)="" var="" len1="Distance(tox" -="" toy="" fry)="" frx="X(id)" fry="Y(id)" len2="Distance(tox" msecs="" *="len2" stepx="(tox" frx)="" (msecs="" interval)="" stepy="(toy" count="0" o(id).sl_int="interruptible" o(id).sl_flag="true" o(id).sl_iid="setInterval(DoSlide," distance(x,="" y)="" x="Math.max(1," x)="" y="Math.max(1," math.round(math.sqrt(math.abs(x="" +="" math.abs(y="" y)))="" doslide()="" goto(id,="" count,="" count)="" (count++="">= (msecs / INTERVAL))
+          O(id).FA_Level <= Math.min(O(id).FA_Start, O(id).FA_End))
+      {
+         O(id).FA_Level = O(id).FA_End
+         O(id).FA_Flag  = false
+         clearInterval(O(id).FA_IID)
+         if (typeof CB != UNDEF) eval(CB)
+      }
+
+      Opacity(id, O(id).FA_Level)
+   }
+}
+
+function FadeOut(id, msecs, interruptible, CB)
+{
+   Fade(id, 100, 0, msecs, interruptible, CB)
+}
+
+function FadeIn(id, msecs, interruptible, CB)
+{
+  Fade(id, 0, 100, msecs, interruptible, CB)
+}
+
+function FadeToggle(id, msecs, interruptible, CB)
+{
+   if (id instanceof Array)
+   {
+      for (var j = 0 ; j < id.length ; ++j)
+         FadeToggle(id[j], msecs, interruptible, CB)
+      return
+   }
+
+   if (O(id).Fadeout) FadeIn( id, msecs, interruptible, CB)
+   else               FadeOut(id, msecs, interruptible, CB)
+}
+
+function FadeBetween(id1, id2, msecs, interruptible, CB)
+{
+   FadeOut(id1, msecs, interruptible, CB)
+   FadeIn( id2, msecs, interruptible, CB)
+}
+
+function Hide(id, CB)
+{
+   S(id, 'display', 'none')
+   O(id, 'HI_Flag', true)
+
+   if (typeof CB != UNDEF) eval(CB)
+}
+
+function Show(id, CB)
+{
+   S(id, 'display', 'block')
+   O(id, 'HI_Flag', false)
+}
+
+function HideToggle(id, CB)
+{
+   if (id instanceof Array)
+   {
+      for (var j = 0 ; j < id.length ; ++j)
+         HideToggle(id[j], CB)
+      return
+   }
+
+   if (S(id).display != 'none') Hide(id, CB)
+   else Show(id, CB)
+}
+
+function Slide(id, frx, fry, tox, toy, msecs, interruptible, CB)
+{
+   if (O(id).SL_Flag)
+   {
+      if (!O(id).SL_Int) return
+      else clearInterval(O(id).SL_IID)
+
+      var len1  = Distance(tox - frx, toy - fry)
+      frx       = X(id)
+      fry       = Y(id)
+      var len2  = Distance(tox - frx, toy - fry)
+      msecs    *= len2 / len1
+   }
+
+   var stepx = (tox - frx) / (msecs / INTERVAL)
+   var stepy = (toy - fry) / (msecs / INTERVAL)
+
+   var count     = 0
+   O(id).SL_Int  = interruptible
+   O(id).SL_Flag = true
+   O(id).SL_IID  = setInterval(DoSlide, INTERVAL)
+
+   function Distance(x, y)
+   {
+      x = Math.max(1, x)
+      y = Math.max(1, y)
+      return Math.round(Math.sqrt(Math.abs(x * x) + Math.abs(y * y)))
+   }
+
+   function DoSlide()
+   {
+      GoTo(id, frx + stepx * count, fry + stepy * count)
+      
+      if (count++ >= (msecs / INTERVAL))
       {
          O(id).SL_Flag = false
          GoTo(id, tox, toy)
@@ -1297,14 +1398,14 @@ function Breadcrumbs(spacer)
 
    var title   = document.title ? document.title : parts[j - 1]
    var url     = crumbs[0] + crumbs[1]
-   var display = InsVars("<a href="#1">Home</a>", url)
+   var display = InsVars("<a href='#1'>Home</a>", url)
  
    if (typeof spacer == UNDEF) gap = ' '
  
    for (j = 2 ; j < crumbs.length - 1 ; ++j)
    {
       url     += '/' + crumbs[j]
-      display += spacer + InsVars("<a href="#1">#2</a>", url, crumbs[j])
+      display += spacer + InsVars("<a href='#1'>#2</a>", url, crumbs[j])
    }
 
    return display + spacer + title
@@ -1685,7 +1786,7 @@ function TextRipple(id, number, msecs)
       var temp = html.substr(0, ctr1)
 
       for (var j = 0 ; j < 7 ; ++j)
-         temp += InsVars("<font size="+#1">#2</font>",
+         temp += InsVars("<font size='+#1'>#2</font>",
             4 - Math.abs(j - 3), html.substr(ctr1 + j, 1))
  
       Html(id, temp + html.substr(ctr1 + j))
@@ -1877,8 +1978,8 @@ function GoogleChart(id, title, tcolor, tsize, type, bwidth,
    if (colors)          tail += '&amp;chco='     + colors
    if (bgfill)          tail += '&amp;chf=bg,s,' + bgfill
 
-   Html(id, "<img src="http://chart.apis.google.com/chart?" +
-      tail + "">")
+   Html(id, "<img src='http://chart.apis.google.com/chart?" +
+      tail + "' />")
 }
 
 function PlaySound(id, file, loop)
@@ -1887,7 +1988,8 @@ function PlaySound(id, file, loop)
    Locate(id, ABS, 0, 0)
 
    if (loop == 'stop') Html(id, '')
-   else Html(id, InsVars("<embed src="#1" hidden="true" "="" +="" "autostart="true" loop="#2">", file, loop))
+   else Html(id, InsVars("<embed src='#1' hidden='true' " +
+      "autostart='true' loop='#2' />", file, loop))
 }
 
 function EmbedYouTube(video, width, height, hq, full, auto)
@@ -1900,16 +2002,21 @@ function EmbedYouTube(video, width, height, hq, full, auto)
    if (!width)           width  = 425
    if (!height)          height = 324
    
-   var temp = InsVars("<object width="#1" height="#2">"      +
-      "<param name="movie" value="http://www.youtube.com/v/" +
-      "#3&amp;fs=1&amp;autoplay=#4#5">", width, height, video,
+   var temp = InsVars("<object width='#1' height='#2'>"      +
+      "<param name='movie' value='http://www.youtube.com/v/" +
+      "#3&amp;fs=1&amp;autoplay=#4#5'>", width, height, video,
       auto, hq)
 
-   temp += InsVars("<param name="allowFullScreen" "="" +="" "value="#1"><param name="allowscriptaccess" "="" +="" "value="always">", full)
+   temp += InsVars("</param><param name='allowFullScreen' "  +
+      "value='#1'></param><param name='allowscriptaccess' "  +
+      "value='always'></param>", full)
 
-   temp += InsVars("<embed src="http://www.youtube.com"      +
-      "/v/#1&amp;fs=1&amp;autoplay=#2#3" type="application/" +
-      "x-shockwave-flash" allowscriptaccess="always" "="" +="" "allowfullscreen="true" ",="" video,="" auto,="" hq)="" temp="" height="#2"></object>",
+   temp += InsVars("<embed src='http://www.youtube.com"      +
+      "/v/#1&amp;fs=1&amp;autoplay=#2#3' type='application/" +
+      "x-shockwave-flash' allowscriptaccess='always' "       +
+      "allowfullscreen='true'", video, auto, hq)
+      
+   temp += InsVars("width='#1' height='#2'></embed></object>",
       width, height)
 
    return temp
@@ -2076,7 +2183,7 @@ function ProtectEmail()
    for (var j=0 ; j < arguments.length ; ++j)
       a += arguments[j]
 
-   return "<a hr"="" +="" "ef"="" "="mai" + "lt" + "o:" + a + "">" + a + "</a>"
+   return "<a hr" + "ef" + "='mai" + "lt" + "o:" + a + "'>" + a + "</a>"
 }
 
 function FieldPrompt(id, prompt, inputcolor, promptcolor, promptstyle)
@@ -2199,7 +2306,68 @@ function ValidateCreditCard(number, month, year)
    var cclen   = number.length
    var chksum  = 0
    
-   if (left >= 3000 && left <= 3059="" ||="" left="">= 3600 && left <= 3699="" ||="" left="">= 3800 && left <= 3889)="" {="" diners="" club="" if="" (cclen="" !="14)" return="" false="" }="" else="" (left="">= 3088 && left <= 3094="" ||="" left="">= 3096 && left <= 3102="" ||="" left="">= 3112 && left <= 3120="" ||="" left="">= 3158 && left <= 3159="" ||="" left="">= 3337 && left <= 3349="" ||="" left="">= 3528 && left <= 3589)="" {="" jcb="" if="" (cclen="" !="16)" return="" false="" }="" else="" (left="">= 3400 && left <= 3499="" ||="" left="">= 3700 && left <= 3799)="" {="" american="" express="" if="" (cclen="" !="15)" return="" false="" }="" else="" (left="">= 3890 && left <= 3899)="" {="" carte="" blanche="" if="" (cclen="" !="14)" return="" false="" }="" else="" (left="">= 4000 && left <= 4999)="" {="" visa="" if="" (cclen="" !="13" &&="" cclen="" return="" false="" }="" else="" (left="">= 5100 && left <= 1="" 2="" 9="" 10="" 5599)="" {="" mastercard="" if="" (cclen="" !="16)" return="" false="" }="" else="" (left="=" 5610)="" australian="" bankcard="" 6011)="" discover="" unrecognized="" card="" for="" (var="" j="1" -="" %="" 2)="" ;="" <="" cclen="" +="2)" (j="" cclen)="" chksum="" *="" d="number[j]" ?="" :="" (chksum="" var="" date="new" date()="" date.settime(date.gettime())="" (year.length="=" 4)="" year="year.substr(2," (year=""> 50)                               return false
+   if (left >= 3000 && left <= 3059 ||
+       left >= 3600 && left <= 3699 ||
+       left >= 3800 && left <= 3889)
+   { // Diners Club
+      if (cclen != 14) return false
+   }
+   else if (left >= 3088 && left <= 3094 ||
+       left >= 3096 && left <= 3102 ||
+       left >= 3112 && left <= 3120 ||
+       left >= 3158 && left <= 3159 ||
+       left >= 3337 && left <= 3349 ||
+       left >= 3528 && left <= 3589)
+   { // JCB
+      if (cclen != 16) return false
+   }
+   else if (left >= 3400 && left <= 3499 ||
+       left >= 3700 && left <= 3799)
+   { // American Express
+      if (cclen != 15) return false
+   }
+   else if (left >= 3890 && left <= 3899)
+   { // Carte Blanche
+      if (cclen != 14) return false
+   }
+   else if (left >= 4000 && left <= 4999)
+   { // Visa
+      if (cclen != 13 && cclen != 16) return false
+   }
+   else if (left >= 5100 && left <= 5599)
+   { // MasterCard
+      if (cclen != 16) return false
+   }
+   else if (left == 5610)
+   { // Australian BankCard
+      if (cclen != 16) return false
+   }
+   else if (left == 6011)
+   { // Discover
+      if (cclen != 16) return false
+   }
+   else return false // Unrecognized Card
+
+   for (var j = 1 - (cclen % 2) ; j < cclen ; j += 2)
+      if (j < cclen) chksum += number[j] * 1
+
+   for (j = cclen % 2 ; j < cclen ; j += 2)
+   {
+      if (j < cclen)
+      {
+         d = number[j] * 2
+         chksum += d < 10 ? d : d - 9
+      }
+   }
+
+   if (chksum % 10 != 0) return false
+
+   var date = new Date()
+   date.setTime(date.getTime())
+
+   if (year.length == 4) year = year.substr(2, 2)
+
+   if (year > 50)                               return false
    else if (year < (date.getFullYear() - 2000)) return false
    else if ((date.getMonth() + 1 ) > month)     return false
    else                                         return true
@@ -2216,12 +2384,12 @@ function RollingCopyright(start)
 function Alert(value)
 {
    var divs = Array('ALERT_DIV', 'SHADOW_DIV')
-   var warn = "<font color="red" size="6" style="vertical-align:middle;">" +
+   var warn = "<font color=red size=6 style='vertical-align:middle;'>" +
               "&#916;</font>&nbsp;"
-   var ok   = "<center><input id="ALERT_OK" type="submit"></center>"
-   var mess = warn + value + '<br><br>' + ok
-   var html = "<div id="ALERT_TITLE"></div>" +
-              "<div id="ALERT_MESSAGE"></div>"
+   var ok   = "<center><input id='ALERT_OK' type='submit' /></center>"
+   var mess = warn + value + '<br /><br />' + ok
+   var html = "<div id='ALERT_TITLE'></div>" +
+              "<div id='ALERT_MESSAGE'></div>"
 
    if (!O('ALERT_DIV'))
    {
@@ -2516,4 +2684,3 @@ function OnDOMReady(func)
       }
    }
 }
-</=></=></=></=></=></=></=></=></=></=></=></=></=></=></=>
