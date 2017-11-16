@@ -1,0 +1,2267 @@
+/************************************/
+/*       PC.css: Version 1.0        */
+/*                                  */
+/* From Plug-in CSS, by Robin Nixon */
+/*        McGraw-Hill 2011          */
+/************************************/
+
+/************************************/
+/*         Chapters 1 & 2           */
+/*                                  */
+/* Because they are simply tutorial */
+/* there are no plug-ins for either */
+/* of Chapters 1 and 2.             */
+/************************************/
+
+/**********************/
+/* Chapter 3: Objects */
+/**********************/
+
+/* 01: Position */
+
+.absolute, .abs { position:absolute; }
+.fixed,    .fix { position:fixed;    }
+.relative, .rel { position:relative; }
+.static,   .sta { position:static;   }
+
+/* 02: Floating */
+
+.leftfloat,  .leftfloat_h:hover,  .lf, .lf_h:hover { float:left;  }
+.rightfloat, .rightfloat_h:hover, .rf, .rf_h:hover { float:right; }
+.nofloat,    .nofloat_h:hover,    .nf, .nf_h:hover { float:none;  }
+
+/* 03: Background Colors */
+
+.aqua_b,      .aqua_ba:active,      .aqua_bh:hover,
+.aqua_lb a,   .aqua_lba a:active,   .aqua_lbh a:hover   {background:#0ff}
+.black_b,     .black_ba:active,     .black_bh:hover,
+.black_lb a,  .black_lba a:active,  .black_lbh a:hover  {background:#000}
+.blue_b,      .blue_ba:active,      .blue_bh:hover,
+.blue_lb a,   .blue_lba a:active,   .blue_lbh a:hover   {background:#00f}
+.brown_b,     .brown_ba:active,     .brown_bh:hover,
+.brown_lb a,  .brown_lba a:active,  .brown_lbh a:hover  {background:#c44}
+.fuchsia_b,   .fuchsia_ba:active,   .fuchsia_bh:hover,
+.fuchsia_lb a,.fuchsia_lba a:active,.fuchsia_lbh a:hover{background:#f0f}
+.gold_b,      .gold_ba:active,      .gold_bh:hover,
+.gold_lb a,   .gold_lba a:active,   .gold_lbh a:hover   {background:#fc0}
+.gray_b,      .gray_ba:active,      .gray_bh:hover,
+.gray_lb a,   .gray_lba a:active,   .gray_lbh a:hover   {background:#888}
+.green_b,     .green_ba:active,     .green_bh:hover,
+.green_lb a,  .green_lba a:active,  .green_lbh a:hover  {background:#080}
+.khaki_b,     .khaki_ba:active,     .khaki_bh:hover,
+.khaki_lb a,  .khaki_lba a:active,  .khaki_lbh a:hover  {background:#cc8}
+.lime_b,      .lime_ba:active,      .lime_bh:hover,
+.lime_lb a,   .lime_lba a:active,   .lime_lbh a:hover   {background:#0f0}
+.maroon_b,    .maroon_ba:active,    .maroon_bh:hover,
+.maroon_lb a, .maroon_lba a:active, .maroon_lbh a:hover {background:#800}
+.navy_b,      .navy_ba:active,      .navy_bh:hover,
+.navy_lb a,   .navy_lba a:active,   .navy_lbh a:hover   {background:#008}
+.olive_b,     .olive_ba:active,     .olive_bh:hover,
+.olive_lb a,  .olive_lba a:active,  .olive_lbh a:hover  {background:#880}
+.orange_b,    .orange_ba:active,    .orange_bh:hover,
+.orange_lb a, .orange_lba a:active, .orange_lbh a:hover {background:#f80}
+.pink_b,      .pink_ba:active,      .pink_bh:hover,
+.pink_lb a,   .pink_lba a:active,   .pink_lbh a:hover   {background:#f88}
+.purple_b,    .purple_ba:active,    .purple_bh:hover,
+.purple_lb a, .purple_lba a:active, .purple_lbh a:hover {background:#808}
+.red_b,       .red_ba:active,       .red_bh:hover,
+.red_lb a,    .red_lba a:active,    .red_lbh a:hover    {background:#f00}
+.silver_b,    .silver_ba:active,    .silver_bh:hover,
+.silver_lb a, .silver_lba a:active, .silver_lbh a:hover {background:#ccc}
+.teal_b,      .teal_ba:active,      .teal_bh:hover,
+.teal_lb a,   .teal_lba a:active,   .teal_lbh a:hover   {background:#088}
+.white_b,     .white_ba:active,     .white_bh:hover,
+.white_lb a,  .white_lba a:active,  .white_lbh a:hover  {background:#fff}
+.yellow_b,    .yellow_ba:active,    .yellow_bh:hover,
+.yellow_lb a, .yellow_lba a:active, .yellow_lbh a:hover {background:#ff0}
+
+/* 04: Gradients */
+
+.carrot1,     .carrot1_a:active,    .carrot1_h:hover,
+.carrot1_l a, .carrot1_la a:active, .carrot1_lh a:hover {
+   background:#ea4;
+   background:linear-gradient(left top, #fd8, #c60);
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#fd8), to(#c60));
+   background:-moz-linear-gradient(top, #fd8, #c60);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f0d080', endColorstr='#c06000');
+}
+.chrome1,     .chrome1_a:active,    .chrome1_h:hover,
+.chrome1_l a, .chrome1_la a:active, .chrome1_lh a:hover {
+   background:#ddd;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#fff), to(#aaa));
+   background:-moz-linear-gradient(top, #fff, #aaa);
+   background:linear-gradient(left top, #fff, #aaa);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f0f0f0', endColorstr='#a0a0a0');
+}
+.coffee1,     .coffee1_a:active,    .coffee1_h:hover,
+.coffee1_l a, .coffee1_la a:active, .coffee1_lh a:hover {
+   background:#c94;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#fc6), to(#752));
+   background:-moz-linear-gradient(top, #fc6, #752);
+   background:linear-gradient(left top, #fc6, #752);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f0c060', endColorstr='#705020');
+}
+.dusk1,       .dusk1_a:active,      .dusk1_h:hover,
+.dusk1_l a,   .dusk1_la a:active,   .dusk1_lh a:hover {
+   background:#79c;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#8ad), to(#357));
+   background:-moz-linear-gradient(top, #8ad, #357);
+   background:linear-gradient(left top, #8ad, #357);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#80a0d0', endColorstr='#305070');
+}
+.earth1,      .earth1_a:active,     .earth1_h:hover,
+.earth1_l a,  .earth1_la a:active,  .earth1_lh a:hover {
+   background:#a86;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#db8), to(#532));
+   background:-moz-linear-gradient(top, #db8, #532);
+   background:linear-gradient(left top, #db8, #532);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#d0b080', endColorstr='#503020');
+}
+.fire1,       .fire1_a:active,      .fire1_h:hover,
+.fire1_l a,   .fire1_la a:active,   .fire1_lh a:hover {
+   background:#db3;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#ef5), to(#b40));
+   background:-moz-linear-gradient(top, #ef5, #b40);
+   background:linear-gradient(left top, #ef5, #b40);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#e0f050', endColorstr='#b04000');
+}
+.grass1,      .grass1_a:active,     .grass1_h:hover,
+.grass1_l a,  .grass1_la a:active,  .grass1_lh a:hover {
+   background:#7b6;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#ae9), to(#160));
+   background:-moz-linear-gradient(top, #ae9, #160);
+   background:linear-gradient(left top, #ae9, #160);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#a0e090', endColorstr='#106000');
+}
+.iron1,       .iron1_a:active,      .iron1_h:hover,
+.iron1_l a,   .iron1_la a:active,   .iron1_lh a:hover {
+   background:#777;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#999), to(#333));
+   background:-moz-linear-gradient(top, #999, #333);
+    background:linear-gradient(left top, #999, #333);
+  filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#909090', endColorstr='#303030');
+}
+.plum1,       .plum1_a:active,      .plum1_h:hover,
+.plum1_l a,   .plum1_la a:active,   .plum1_lh a:hover {
+   background:#969;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#b8a), to(#636));
+   background:-moz-linear-gradient(top, #b8a, #636);
+   background:linear-gradient(left top, #b8a, #636);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#b080a0', endColorstr='#603060');
+}
+.rose1,       .rose1_a:active,      .rose1_h:hover,
+.rose1_l a,   .rose1_la a:active,   .rose1_lh a:hover {
+   background:#e45;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#f67), to(#b12));
+   background:-moz-linear-gradient(top, #f67, #b12);
+   background:linear-gradient(top, #f67, #b12);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f06070', endColorstr='#b01020');
+}
+.sky1,        .sky1_a:active,       .sky1_h:hover,
+.sky1_l a,    .sky1_la a:active,    .sky1_lh a:hover {
+   background:#abe;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#cdf), to(#68c));
+   background:-moz-linear-gradient(top, #cdf, #68c);
+   background:linear-gradient(left top, #cdf, #68c);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#c0d0f0', endColorstr='#6080c0');
+}
+.sunset1,     .sunset1_a:active,    .sunset1_h:hover,
+.sunset1_l a, .sunset1_la a:active, .sunset1_lh a:hover {
+   background:#ed3;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#fe4), to(#ca0));
+   background:-moz-linear-gradient(top, #fe4, #ca0);
+   background:linear-gradient(left top, #fe4, #ca0);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f0e040', endColorstr='#c0a000');
+}
+.tin1,        .tin1_a:active,       .tin1_h:hover,
+.tin1_l a,    .tin1_la a:active,    .tin1_lh a:hover {
+   background:#aaa;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#bbb), to(#777));
+   background:-moz-linear-gradient(top, #bbb, #777);
+   background:linear-gradient(left top, #bbb, #777);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#b0b0b0', endColorstr='#707070');
+}
+.water1,      .water1_a:active,     .water1_h:hover,
+.water1_l a,  .water1_la a:active,  .water1_lh a:hover {
+   background:#ace;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#eff), to(#58c));
+   background:-moz-linear-gradient(top, #eff, #58c);
+   background:linear-gradient(left top, #eff, #58c);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#e0f0f0', endColorstr='#5080c0');
+}
+.wine1,       .wine1_a:active,      .wine1_h:hover,
+.wine1_l a,   .wine1_la a:active,   .wine1_lh a:hover {
+   background:#d33;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#f44), to(#922));
+   background:-moz-linear-gradient(top, #f44, #922);
+   background:linear-gradient(left top, #f44, #922);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#f04040', endColorstr='#902020');
+}
+
+/* 05: Inverse Gradients */
+
+.carrot2,     .carrot2_a:active,    .carrot2_h:hover,
+.carrot2_l a, .carrot2_la a:active, .carrot2_lh a:hover {
+   background:#d93;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#c60), to(#fd8));
+   background:-moz-linear-gradient(top, #c60, #fd8);
+   background:linear-gradient(left top, #c60, #fd8);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#c06000', endColorstr='#f0d080');
+}
+.chrome2,     .chrome2_a:active,    .chrome2_h:hover,
+.chrome2_l a, .chrome2_la a:active, .chrome2_lh a:hover {
+   background:#ccc;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#aaa), to(#fff));
+   background:-moz-linear-gradient(top, #aaa, #fff);
+   background:linear-gradient(left top, #aaa, #fff);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#a0a0a0', endColorstr='#f0f0f0');
+}
+.coffee2,     .coffee2_a:active,    .coffee2_h:hover,
+.coffee2_l a, .coffee2_la a:active, .coffee2_lh a:hover {
+   background:#b83;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#752), to(#fc6));
+   background:-moz-linear-gradient(top, #752, #fc6);
+   background:linear-gradient(left top, #752, #fc6);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#705020', endColorstr='#f0c060');
+}
+.dusk2,       .dusk2_a:active,      .dusk2_h:hover,
+.dusk2_l a,   .dusk2_la a:active,   .dusk2_lh a:hover {
+   background:#68b;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#357), to(#8ad));
+   background:-moz-linear-gradient(top, #357, #8ad);
+   background:linear-gradient(left top, #357, #8ad);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#305070', endColorstr='#80a0d0');
+}
+.earth2,      .earth2_a:active,     .earth2_h:hover,
+.earth2_l a,  .earth2_la a:active,  .earth2_lh a:hover {
+   background:#975;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#532), to(#db8));
+   background:-moz-linear-gradient(top, #532, #db8);
+   background:linear-gradient(left top, #532, #db8);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#503020', endColorstr='#d0b080');
+}
+.fire2,       .fire2_a:active,      .fire2_h:hover,
+.fire2_l a,   .fire2_la a:active,   .fire2_lh a:hover {
+   background:#ca2;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#b40), to(#ef5));
+   background:-moz-linear-gradient(top, #b40, #ef5);
+   background:linear-gradient(left top, #b40, #ef5);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#b04000', endColorstr='#e0f050');
+}
+.grass2,      .grass2_a:active,     .grass2_h:hover,
+.grass2_l a,  .grass2_la a:active,  .grass2_lh a:hover {
+   background:#6a5;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#160), to(#ae9));
+   background:-moz-linear-gradient(top, #160, #ae9);
+   background:linear-gradient(left top, #160, #ae9);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#106000', endColorstr='#aaee99');
+}
+.iron2,       .iron2_a:active,      .iron2_h:hover,
+.iron2_l a,   .iron2_la a:active,   .iron2_lh a:hover {
+   background:#666;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#333), to(#999));
+   background:-moz-linear-gradient(top, #333, #999);
+   background:linear-gradient(left top, #333, #999);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#303030', endColorstr='#909090');
+}
+.plum2,       .plum2_a:active,      .plum2_h:hover,
+.plum2_l a,   .plum2_la a:active,   .plum2_lh a:hover {
+   background:#858;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#636), to(#b8a));
+   background:-moz-linear-gradient(top, #636, #b8a);
+   background:linear-gradient(left top, #636, #b8a);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#603060', endColorstr='#b080a0');
+}
+.rose2,       .rose2_a:active,      .rose2_h:hover,
+.rose2_l a,   .rose2_la a:active,   .rose2_lh a:hover {
+   background:#d34;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#b12), to(#f67));
+   background:-moz-linear-gradient(top, #b12, #f67);
+   background:linear-gradient(left top, #b12, #f67);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#b01020', endColorstr='#f06070');
+}
+.sky2,        .sky2_a:active,       .sky2_h:hover,
+.sky2_l a,    .sky2_la a:active,    .sky2_lh a:hover {
+   background:#9ad;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#68c), to(#cdf));
+   background:-moz-linear-gradient(top, #68c, #cdf);
+   background:linear-gradient(left top, #68c, #cdf);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#6080c0', endColorstr='#c0d0f0');
+}
+.sunset2,     .sunset2_a:active,    .sunset2_h:hover,
+.sunset2_l a, .sunset2_la a:active, .sunset2_lh a:hover {
+   background:#dc2;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#ca0), to(#fe4));
+   background:-moz-linear-gradient(top, #ca0, #fe4);
+   background:linear-gradient(left top, #ca0, #fe4);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#c0a000', endColorstr='#f0e040');
+}
+.tin2,        .tin2_a:active,       .tin2_h:hover,
+.tin2_l a,    .tin2_la a:active,    .tin2_lh a:hover {
+   background:#999;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#777), to(#bbb));
+   background:-moz-linear-gradient(top, #777, #bbb);
+   background:linear-gradient(left top, #777, #bbb);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#707070', endColorstr='#b0b0b0');
+}
+.water2,      .water2_a:active,     .water2_h:hover,
+.water2_l a,  .water2_la a:active,  .water2_lh a:hover {
+   background:#9bd;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#58c), to(#eff));
+   background:-moz-linear-gradient(top, #58c, #eff);
+   background:linear-gradient(left top, #58c, #eff);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#5080c0', endColorstr='#e0f0f0');
+}
+.wine2,       .wine2_a:active,      .wine2_h:hover,
+.wine2_l a,   .wine2_la a:active,   .wine2_lh a:hover {
+   background:#c22;
+   background:-webkit-gradient(linear, left top, left bottom,
+              from(#922), to(#f44));
+   background:-moz-linear-gradient(top, #922, #f44);
+   background:linear-gradient(left top, #922, #f44);
+   filter    :progid:DXImageTransform.Microsoft.Gradient(
+              startColorstr='#902020', endColorstr='#f04040');
+}
+
+/* 06: Box Shadows */
+
+.boxshadow,                     .boxshadow_a:active,
+.boxshadow_h:hover,             .boxshadow_l a,
+.boxshadow_la a:active,         .boxshadow_lh a:hover {
+   -moz-box-shadow   :#888888 4px 4px 6px;
+   -webkit-box-shadow:#888888 4px 4px 6px;
+   box-shadow        :#888888 4px 4px 6px;
+   filter            :progid:DXImageTransform.Microsoft.Shadow(
+                      color='#888888', Direction=135, Strength=6);
+}
+.lightestboxshadow,             .lightestboxshadow_a:active,
+.lightestboxshadow_h:hover,     .lightestboxshadow_l a,
+.lightestboxshadow_la a:active, .lightestboxshadow_lh a:hover {
+   -moz-box-shadow   :#ffffff 4px 4px 6px;
+   -webkit-box-shadow:#ffffff 4px 4px 6px;
+   box-shadow        :#ffffff 4px 4px 6px;
+   filter            :progid:DXImageTransform.Microsoft.Shadow(
+                      color='#cccccc', Direction=135, Strength=6);
+}
+.lightboxshadow,                .lightboxshadow_a:active,
+.lightboxshadow_h:hover,        .lightboxshadow_l a,
+.lightboxshadow_la a:active,    .lightboxshadow_lh a:hover {
+   -moz-box-shadow   :#cccccc 4px 4px 6px;
+   -webkit-box-shadow:#cccccc 4px 4px 6px;
+   box-shadow        :#cccccc 4px 4px 6px;
+   filter            :progid:DXImageTransform.Microsoft.Shadow(
+                      color='#cccccc', Direction=135, Strength=6);
+}
+.darkboxshadow,                 .darkboxshadow_a:active,
+.darkboxshadow_h:hover,         .darkboxshadow_l a,
+.darkboxshadow_la a:active,     .darkboxshadow_lh a:hover {
+   box-shadow        :#444444 4px 4px 6px;
+   -moz-box-shadow   :#444444 4px 4px 6px;
+   -webkit-box-shadow:#444444 4px 4px 6px;
+   filter            :progid:DXImageTransform.Microsoft.Shadow(
+                      color='#444444', Direction=135, Strength=6);
+}
+.darkestboxshadow,              .darkestboxshadow_a:active,
+.darkestboxshadow_h:hover,      .darkestboxshadow_l a,
+.darkestboxshadow_la a:active,  .darkestboxshadow_lh a:hover {
+   -moz-box-shadow   :#000000 4px 4px 6px;
+   -webkit-box-shadow:#000000 4px 4px 6px;
+   box-shadow        :#000000 4px 4px 6px;
+   filter            :progid:DXImageTransform.Microsoft.Shadow(
+                      color='#000000', Direction=135, Strength=6);
+}
+
+/* 07: Padding */
+
+.padding,                     .padding_a:active,
+.padding_h:hover,             .padding_l a,
+.padding_la a:active,         .padding_lh a:hover
+   { padding:8px;  }
+.smallestpadding,             .smallestpadding_a:active,
+.smallestpadding_h:hover,     .smallestpadding_l a,
+.smallestpadding_la a:active, .smallestpadding_lh a:hover
+   { padding:2px;  }
+.smallpadding,                .smallpadding_a:active,
+.smallpadding_h:hover,        .smallpadding_l a,
+.smallpadding_la a:active,    .smallpadding_lh a:hover
+   { padding:5px;  }
+.largepadding,                .largepadding_a:active,
+.largepadding_h:hover,        .largepadding_l a,
+.largepadding_la a:active,    .largepadding_lh a:hover
+   { padding:11px; }
+.largestpadding,              .largestpadding_a:active,
+.largestpadding_h:hover,      .largestpadding_l a,
+.largestpadding_la a:active,  .largestpadding_lh a:hover
+   { padding:15px; }
+
+/* 08: Rounded Borders */
+
+.round,                     .round_a:active,
+.round_h:hover,             .round_l a,
+.round_la a:active,         .round_lh a:hover {
+   border-radius        :10px;
+   -moz-border-radius   :10px;
+   -webkit-border-radius:10px;
+}
+.smallestround,             .smallestround_a:active,
+.smallestround_h:hover,     .smallestround_l a,
+.smallestround_la a:active, .smallestround_lh a:hover {
+   border-radius        :2px;
+   -moz-border-radius   :2px;
+   -webkit-border-radius:2px;
+}
+.smallround,                .smallround_a:active,
+.smallround_h:hover,        .smallround_l a,
+.smallround_la a:active,    .smallround_lh a:hover {
+   border-radius        :5px;
+   -moz-border-radius   :5px;
+   -webkit-border-radius:5px;
+}
+.largeround,                .largeround_a:active,
+.largeround_h:hover,        .largeround_l a,
+.largeround_la a:active,    .largeround_lh a:hover {
+   border-radius        :15px;
+   -moz-border-radius   :15px;
+   -webkit-border-radius:15px;
+}
+.largestround,              .largestround_a:active,
+.largestround_h:hover,      .largestround_l a,
+.largestround_la a:active,  .largestround_lh a:hover {
+   border-radius        :20px;
+   -moz-border-radius   :20px;
+   -webkit-border-radius:20px;
+}
+
+/* 09: Transparency */
+
+.trans00,     .trans00_a:active,    .trans00_h:hover,
+.trans00_l a, .trans00_la a:active, .trans00_lh a:hover {
+   opacity:1;
+   filter:alpha(opacity = '100');
+}
+.trans01,     .trans01_a:active,    .trans01_h:hover,
+.trans01_l a, .trans01_la a:active, .trans01_lh a:hover {
+   opacity:0.9;
+   filter:alpha(opacity = '90');
+}
+.trans02,     .trans02_a:active,    .trans02_h:hover,
+.trans02_l a, .trans02_la a:active, .trans02_lh a:hover {
+   opacity:0.8;
+   filter:alpha(opacity = '80');
+}
+.trans03,     .trans03_a:active,    .trans03_h:hover,
+.trans03_l a, .trans03_la a:active, .trans03_lh a:hover {
+   opacity:0.7;
+   filter:alpha(opacity = '70');
+}
+.trans04,     .trans04_a:active,    .trans04_h:hover,
+.trans04_l a, .trans04_la a:active, .trans04_lh a:hover {
+   opacity:0.6;
+   filter:alpha(opacity = '60');
+}
+.trans05,     .trans05_a:active,    .trans05_h:hover,
+.trans05_l a, .trans05_la a:active, .trans05_lh a:hover {
+   opacity:0.5;
+   filter:alpha(opacity = '50');
+}
+.trans06,     .trans06_a:active,    .trans06_h:hover,
+.trans06_l a, .trans06_la a:active, .trans06_lh a:hover {
+   opacity:0.4;
+   filter:alpha(opacity = '40');
+}
+.trans07,     .trans07_a:active,    .trans07_h:hover,
+.trans07_l a, .trans07_la a:active, .trans07_lh a:hover {
+   opacity:0.3;
+   filter:alpha(opacity = '30');
+}
+.trans08,     .trans08_a:active,    .trans08_h:hover,
+.trans08_l a, .trans08_la a:active, .trans08_lh a:hover {
+   opacity:0.2;
+   filter:alpha(opacity = '20');
+}
+.trans09,     .trans09_a:active,    .trans09_h:hover,
+.trans09_l a, .trans09_la a:active, .trans09_lh a:hover {
+   opacity:0.1;
+   filter:alpha(opacity = '10');
+}
+.trans10,     .trans10_a:active,    .trans10_h:hover,
+.trans10_l a, .trans10_la a:active, .trans10_lh a:hover {
+   opacity:0;
+   filter:alpha(opacity = '0');
+}
+
+/* 10: Visibility And Display */
+
+.visible   { visibility:visible;    }
+.invisible { visibility:hidden;     }
+.hidden    { display   :none;       }
+.block     { display   :block;      }
+.inline    { display   :inline;     }
+.tablecell { display   :table-cell; }
+.valigntop { vertical-align:top;    }
+.valignmid { vertical-align:middle; }
+.valignbot { vertical-align:bottom; }
+
+.hovered         {display:none;  }
+.hovered:hover   {display:block; }
+.unhovered:hover {display:none;  }
+
+/* 11: Scroll Bars */
+
+.scroll,             .scroll_a:active,        .scroll_h:hover,
+.scroll_l a,         .scroll_la a:active,     .scroll_lh a:hover,
+.scroll_f:focus
+   { overflow:scroll; }
+.noscroll,           .noscroll_a:active,      .noscroll_h:hover,
+.noscroll_l a,       .noscroll_la a:active,   .noscroll_lh a:hover,
+.nooverflow,         .nooverflow_a:active,    .nooverflow_h:hover,
+.nooverflow_l a,     .nooverflow_la a:active, .nooverflow_lh a:hover,
+.noscroll_f:focus,   .nooverflow_f:focus
+   { overflow:hidden; }
+.autoscroll,         .autoscroll_a:active,    .autoscroll_h:hover,
+.autoscroll_l a,     .autoscroll_la a:active, .autoscroll_lh a:hover,
+.overflow,           .overflow_a:active,      .overflow_h:hover,
+.overflow_l a,       .overflow_la a:active,   .overflow_lh a:hover,
+.autoscroll_f:focus, .overflow_f:focus
+   { overflow:auto;   }
+
+/* 12: Maximum Sizes */
+
+.maxwidth,      .maxwidth_a:active,     .maxwidth_h:hover,
+.maxwidth_l a,  .maxwidth_la a:active,  .maxwidth_lh a:hover 
+   { width :100%; }
+.maxheight,     .maxheight_a:active,    .maxheight_h:hover
+.maxheight_l a, .maxheight_la a:active, .maxheight_lh a:hover
+   { height:100%; }
+.maxsize,       .maxsize_a:active,      .maxsize_h:hover,
+.maxsize_l a,   .maxsize_la a:active,   .maxsize_lh a:hover
+   { height:100%; width:100%; }
+   
+/* 13: Location */
+
+.totop,    .totop_h:hover    { top   :0px; }
+.tobottom, .tobottom_h:hover { bottom:0px; }
+.toleft,   .toleft_h:hover   { left  :0px; }
+.toright,  .toright_h:hover  { right :0px; }
+
+.leftby0,   .leftby0_h:hover,
+.rightby0,  .rightby0_h:hover  { left:0px;    }
+.leftby5,   .leftby5_h:hover   { left:-5px;   }
+.leftby10,  .leftby10_h:hover  { left:-10px;  }
+.leftby20,  .leftby20_h:hover  { left:-20px;  }
+.leftby30,  .leftby30_h:hover  { left:-30px;  }
+.leftby40,  .leftby40_h:hover  { left:-40px;  }
+.leftby50,  .leftby50_h:hover  { left:-50px;  }
+.leftby60,  .leftby60_h:hover  { left:-60px;  }
+.leftby70,  .leftby70_h:hover  { left:-70px;  }
+.leftby80,  .leftby80_h:hover  { left:-80px;  }
+.leftby90,  .leftby90_h:hover  { left:-90px;  }
+.leftby100, .leftby100_h:hover { left:-100px; }
+
+.rightby5,   .rightby5_h:hover   { left:5px;   }
+.rightby10,  .rightby10_h:hover  { left:10px;  }
+.rightby20,  .rightby20_h:hover  { left:20px;  }
+.rightby30,  .rightby30_h:hover  { left:30px;  }
+.rightby40,  .rightby40_h:hover  { left:40px;  }
+.rightby50,  .rightby50_h:hover  { left:50px;  }
+.rightby60,  .rightby60_h:hover  { left:60px;  }
+.rightby70,  .rightby70_h:hover  { left:70px;  }
+.rightby80,  .rightby80_h:hover  { left:80px;  }
+.rightby90,  .rightby90_h:hover  { left:90px;  }
+.rightby100, .rightby100_h:hover { left:100px; }
+
+.upby0,   .upby0_h:hover,
+.downby0, .downby0_h:hover  { top:0px;    }
+.upby5,   .upby5_h:hover    { top:-5px;   }
+.upby10,  .upby10_h:hover   { top:-10px;  }
+.upby20,  .upby20_h:hover   { top:-20px;  }
+.upby30,  .upby30_h:hover   { top:-30px;  }
+.upby40,  .upby40_h:hover   { top:-40px;  }
+.upby50,  .upby50_h:hover   { top:-50px;  }
+.upby60,  .upby60_h:hover   { top:-60px;  }
+.upby70,  .upby70_h:hover   { top:-70px;  }
+.upby80,  .upby80_h:hover   { top:-80px;  }
+.upby90,  .upby90_h:hover   { top:-90px;  }
+.upby100, .upby100_h:hover  { top:-100px; }
+
+.downby5,   .downby5_h:hover   { top:5px;   }
+.downby10,  .downby10_h:hover  { top:10px;  }
+.downby20,  .downby20_h:hover  { top:20px;  }
+.downby30,  .downby30_h:hover  { top:30px;  }
+.downby40,  .downby40_h:hover  { top:40px;  }
+.downby50,  .downby50_h:hover  { top:50px;  }
+.downby60,  .downby60_h:hover  { top:60px;  }
+.downby70,  .downby70_h:hover  { top:70px;  }
+.downby80,  .downby80_h:hover  { top:80px;  }
+.downby90,  .downby90_h:hover  { top:90px;  }
+.downby100, .downby100_h:hover { top:100px; }
+
+/* 14: Selective Margins */
+
+.leftmargin0,   .leftmargin0_h:hover   { margin-left:0px;   }
+.leftmargin5,   .leftmargin5_h:hover   { margin-left:5px;   }
+.leftmargin10,  .leftmargin10_h:hover  { margin-left:10px;  }
+.leftmargin20,  .leftmargin20_h:hover  { margin-left:20px;  }
+.leftmargin30,  .leftmargin30_h:hover  { margin-left:30px;  }
+.leftmargin40,  .leftmargin40_h:hover  { margin-left:40px;  }
+.leftmargin50,  .leftmargin50_h:hover  { margin-left:50px;  }
+.leftmargin60,  .leftmargin60_h:hover  { margin-left:60px;  }
+.leftmargin70,  .leftmargin70_h:hover  { margin-left:70px;  }
+.leftmargin80,  .leftmargin80_h:hover  { margin-left:80px;  }
+.leftmargin90,  .leftmargin90_h:hover  { margin-left:90px;  }
+.leftmargin100, .leftmargin100_h:hover { margin-left:100px; }
+
+.rightmargin0,   .rightmargin0_h:hover   { margin-right:0px;   }
+.rightmargin5,   .rightmargin5_h:hover   { margin-right:5px;   }
+.rightmargin10,  .rightmargin10_h:hover  { margin-right:10px;  }
+.rightmargin20,  .rightmargin20_h:hover  { margin-right:20px;  }
+.rightmargin30,  .rightmargin30_h:hover  { margin-right:30px;  }
+.rightmargin40,  .rightmargin40_h:hover  { margin-right:40px;  }
+.rightmargin50,  .rightmargin50_h:hover  { margin-right:50px;  }
+.rightmargin60,  .rightmargin60_h:hover  { margin-right:60px;  }
+.rightmargin70,  .rightmargin70_h:hover  { margin-right:70px;  }
+.rightmargin80,  .rightmargin80_h:hover  { margin-right:80px;  }
+.rightmargin90,  .rightmargin90_h:hover  { margin-right:90px;  }
+.rightmargin100, .rightmargin100_h:hover { margin-right:100px; }
+
+.topmargin0,   .topmargin0_h:hover   { margin-top:0px;   }
+.topmargin5,   .topmargin5_h:hover   { margin-top:5px;   }
+.topmargin10,  .topmargin10_h:hover  { margin-top:10px;  }
+.topmargin20,  .topmargin20_h:hover  { margin-top:20px;  }
+.topmargin30,  .topmargin30_h:hover  { margin-top:30px;  }
+.topmargin40,  .topmargin40_h:hover  { margin-top:40px;  }
+.topmargin50,  .topmargin50_h:hover  { margin-top:50px;  }
+.topmargin60,  .topmargin60_h:hover  { margin-top:60px;  }
+.topmargin70,  .topmargin70_h:hover  { margin-top:70px;  }
+.topmargin80,  .topmargin80_h:hover  { margin-top:80px;  }
+.topmargin90,  .topmargin90_h:hover  { margin-top:90px;  }
+.topmargin100, .topmargin100_h:hover { margin-top:100px; }
+
+.bottommargin0,   .bottommargin0_h:hover   { margin-bottom:0px;   }
+.bottommargin5,   .bottommargin5_h:hover   { margin-bottom:5px;   }
+.bottommargin10,  .bottommargin10_h:hover  { margin-bottom:10px;  }
+.bottommargin20,  .bottommargin20_h:hover  { margin-bottom:20px;  }
+.bottommargin30,  .bottommargin30_h:hover  { margin-bottom:30px;  }
+.bottommargin40,  .bottommargin40_h:hover  { margin-bottom:40px;  }
+.bottommargin50,  .bottommargin50_h:hover  { margin-bottom:50px;  }
+.bottommargin60,  .bottommargin60_h:hover  { margin-bottom:60px;  }
+.bottommargin70,  .bottommargin70_h:hover  { margin-bottom:70px;  }
+.bottommargin80,  .bottommargin80_h:hover  { margin-bottom:80px;  }
+.bottommargin90,  .bottommargin90_h:hover  { margin-bottom:90px;  }
+.bottommargin100, .bottommargin100_h:hover { margin-bottom:100px; }
+
+/* 15: Selective Padding */
+
+.leftpadding0,   .leftpadding0_h:hover   { padding-left:0px;   }
+.leftpadding5,   .leftpadding5_h:hover   { padding-left:5px;   }
+.leftpadding10,  .leftpadding10_h:hover  { padding-left:10px;  }
+.leftpadding20,  .leftpadding20_h:hover  { padding-left:20px;  }
+.leftpadding30,  .leftpadding30_h:hover  { padding-left:30px;  }
+.leftpadding40,  .leftpadding40_h:hover  { padding-left:40px;  }
+.leftpadding50,  .leftpadding50_h:hover  { padding-left:50px;  }
+.leftpadding60,  .leftpadding60_h:hover  { padding-left:60px;  }
+.leftpadding70,  .leftpadding70_h:hover  { padding-left:70px;  }
+.leftpadding80,  .leftpadding80_h:hover  { padding-left:80px;  }
+.leftpadding90,  .leftpadding90_h:hover  { padding-left:90px;  }
+.leftpadding100, .leftpadding100_h:hover { padding-left:100px; }
+
+.rightpadding0,   .rightpadding0_h:hover   { padding-right:0px;   }
+.rightpadding5,   .rightpadding5_h:hover   { padding-right:5px;   }
+.rightpadding10,  .rightpadding10_h:hover  { padding-right:10px;  }
+.rightpadding20,  .rightpadding20_h:hover  { padding-right:20px;  }
+.rightpadding30,  .rightpadding30_h:hover  { padding-right:30px;  }
+.rightpadding40,  .rightpadding40_h:hover  { padding-right:40px;  }
+.rightpadding50,  .rightpadding50_h:hover  { padding-right:50px;  }
+.rightpadding60,  .rightpadding60_h:hover  { padding-right:60px;  }
+.rightpadding70,  .rightpadding70_h:hover  { padding-right:70px;  }
+.rightpadding80,  .rightpadding80_h:hover  { padding-right:80px;  }
+.rightpadding90,  .rightpadding90_h:hover  { padding-right:90px;  }
+.rightpadding100, .rightpadding100_h:hover { padding-right:100px; }
+
+.toppadding0,   .toppadding0_h:hover   { padding-top:0px;   }
+.toppadding5,   .toppadding5_h:hover   { padding-top:5px;   }
+.toppadding10,  .toppadding10_h:hover  { padding-top:10px;  }
+.toppadding20,  .toppadding20_h:hover  { padding-top:20px;  }
+.toppadding30,  .toppadding30_h:hover  { padding-top:30px;  }
+.toppadding40,  .toppadding40_h:hover  { padding-top:40px;  }
+.toppadding50,  .toppadding50_h:hover  { padding-top:50px;  }
+.toppadding60,  .toppadding60_h:hover  { padding-top:60px;  }
+.toppadding70,  .toppadding70_h:hover  { padding-top:70px;  }
+.toppadding80,  .toppadding80_h:hover  { padding-top:80px;  }
+.toppadding90,  .toppadding90_h:hover  { padding-top:90px;  }
+.toppadding100, .toppadding100_h:hover { padding-top:100px; }
+
+.bottompadding0,   .bottompadding0_h:hover   { padding-bottom:0px;   }
+.bottompadding5,   .bottompadding5_h:hover   { padding-bottom:5px;   }
+.bottompadding10,  .bottompadding10_h:hover  { padding-bottom:10px;  }
+.bottompadding20,  .bottompadding20_h:hover  { padding-bottom:20px;  }
+.bottompadding30,  .bottompadding30_h:hover  { padding-bottom:30px;  }
+.bottompadding40,  .bottompadding40_h:hover  { padding-bottom:40px;  }
+.bottompadding50,  .bottompadding50_h:hover  { padding-bottom:50px;  }
+.bottompadding60,  .bottompadding60_h:hover  { padding-bottom:60px;  }
+.bottompadding70,  .bottompadding70_h:hover  { padding-bottom:70px;  }
+.bottompadding80,  .bottompadding80_h:hover  { padding-bottom:80px;  }
+.bottompadding90,  .bottompadding90_h:hover  { padding-bottom:90px;  }
+.bottompadding100, .bottompadding100_h:hover { padding-bottom:100px; }
+
+/* 16: Border Style */
+
+.bdotted, .bdotted_h:hover { border-style:dotted; }
+.bdashed, .bdashed_h:hover { border-style:dashed; }
+.bsolid,  .bsolid_h:hover  { border-style:solid;  }
+.bdouble, .bdouble_h:hover { border-style:double; }
+.bgroove, .bgroove_h:hover { border-style:groove; }
+.bridge,  .bridge_h:hover  { border-style:ridge;  }
+.binset,  .binset_h:hover  { border-style:inset;  }
+.boutset, .boutset_h:hover { border-style:outset; }
+
+/* 17: Border Width */
+
+.bwidth0,  .bwidth0_h:hover  { border-width:0px;  }
+.bwidth1,  .bwidth1_h:hover  { border-width:1px;  }
+.bwidth2,  .bwidth2_h:hover  { border-width:2px;  }
+.bwidth3,  .bwidth3_h:hover  { border-width:3px;  }
+.bwidth4,  .bwidth4_h:hover  { border-width:4px;  }
+.bwidth5,  .bwidth5_h:hover  { border-width:5px;  }
+.bwidth10, .bwidth10_h:hover { border-width:10px; }
+.bwidth15, .bwidth15_h:hover { border-width:15px; }
+.bwidth20, .bwidth20_h:hover { border-width:20px; }
+.bwidth25, .bwidth25_h:hover { border-width:25px; }
+.bwidth50, .bwidth50_h:hover { border-width:50px; }
+
+/* 18: Border Color */
+
+.baqua,    .baqua_h:hover    { border-color:#0ff; }
+.bblack,   .bblack_h:hover   { border-color:#000; }
+.bblue,    .bblue_h:hover    { border-color:#00f; }
+.bbrown,   .bbrown_h:hover   { border-color:#c44; }
+.bfuchsia, .bfuchsia_h:hover { border-color:#f0f; }
+.bgold,    .bgold_h:hover    { border-color:#fc0; }
+.bgray,    .bgray_h:hover    { border-color:#888; }
+.bgreen,   .bgreen_h:hover   { border-color:#080; }
+.bkhaki,   .bkhaki_h:hover   { border-color:#cc8; }
+.blime,    .blime_h:hover    { border-color:#0f0; }
+.bmaroon,  .bmaroon_h:hover  { border-color:#800; }
+.bnavy,    .bnavy_h:hover    { border-color:#008; }
+.bolive,   .bolive_h:hover   { border-color:#880; }
+.borange,  .borange_h:hover  { border-color:#f80; }
+.bpink,    .bpink_h:hover    { border-color:#f88; }
+.bpurple,  .bpurple_h:hover  { border-color:#808; }
+.bred,     .bred_h:hover     { border-color:#f00; }
+.bsilver,  .bsilver_h:hover  { border-color:#ccc; }
+.bteal,    .bteal_h:hover    { border-color:#088; }
+.bwhite,   .bwhite_h:hover   { border-color:#fff; }
+.byellow,  .byellow_h:hover  { border-color:#ff0; }
+
+/* 19: No Outline */
+
+.nooutline:focus             { outline:none; }
+.nooutline::-moz-focus-inner { border :none; padding:1px 3px;}
+
+/**********************************/
+/* Chapter 4: Text and Typography */
+/**********************************/
+
+/* 20: Fonts */
+
+.arial,         .arial_a:active,        .arial_h:hover,
+.arial_l a,     .arial_la a:active,     .arial_lh a:hover
+ { font-family:"Arial", sans-serif; }
+.arialb,        .arialb_a:active,       .arialb_h:hover,
+.arialb_l a,    .arialb_la a:active,    .arialb_lh a:hover
+ { font-family:"Arial Black", sans-serif; }
+.arialn,        .arialn_a:active,       .arialn_h:hover,
+.arialn_l a,    .arialn_la a:active,    .arialbn_lh a:hover
+ { font-family:"Arial Narrow", sans-serif; }
+.avant,         .avant_a:active,        .avant_h:hover,
+.avant_l a,     .avant_la a:active,     .avant_lh a:hover
+ { font-family:"Avant Garde", sans-serif; }
+.bookman,       .bookman_a:active,      .bookman_h:hover,
+.bookman_l a,   .bookman_la a:active,   .bookman_lh a:hover
+ { font-family:"Bookman", "Bookman Old Style", serif; }
+.century,       .century_a:active,       .century_h:hover,
+.century_l a,   .century_la a:active,    .century_lh a:hover
+ { font-family:"Century Gothic", sans-serif; }
+.copper,        .copper_a:active,       .copper_h:hover,
+.copper_l a,    .copper_la a:active,    .copper_lh a:hover
+ { font-family:"Copperplate", "Copperplate Gothic Light", serif; }
+.comic,         .comic_a:active,        .comic_h:hover,
+.comic_l a,     .comic_la a:active,     .comic_lh a:hover
+ { font-family:"Comic Sans MS", cursive; }
+.courier,       .courier_a:active,      .courier_h:hover,
+.courier_l a,   .courier_la a:active,   .courier_lh a:hover
+ { font-family:"Courier", monospace; }
+.couriern,      .couriern_a:active,     .couriern_h:hover,
+.couriern_l a,  .couriern_la a:active,  .couriern_lh a:hover
+ { font-family:"Courier New", monospace; }
+.garamond,      .garamond_a:active,     .garamond_h:hover,
+.garamond_l a,  .garamond_la a:active,  .garamond_lh a:hover
+ { font-family:"Garamond", serif; }
+.gill,          .gill_a:active,         .gill_h:hover,
+.gill_l a,      .gill_la a:active,      .gill_lh a:hover
+ { font-family:"Gill Sans", "Gill Sans MT", sans-serif; }
+.georgia,       .georgia_a:active,      .georgia_h:hover,
+.georgia_l a,   .georgia_la a:active,   .georgia_lh a:hover
+ { font-family:"Georgia", serif; }
+.helvetica,     .helvetica_a:active,    .helvetica_h:hover,
+.helvetica_l a, .helvetica_la a:active, .helvetica_lh a:hover
+ { font-family:"Helvetica, sans-serif"; }
+.impact,        .impact_a:active,       .impact_h:hover,
+.impact_l a,    .impact_la a:active,    .impact_lh a:hover
+ { font-family:"Impact", fantasy; }
+.lucida,        .lucida_a:active,       .lucida_h:hover,
+.lucida_l a,    .lucida_la a:active,    .lucida_lh a:hover
+ { font-family:"Lucida Grande", "Lucida Sans Unicode", sans-serif; }
+.lucidac,       .lucidac_a:active,      .lucidac_h:hover,
+.lucidac_l a,   .lucidac_la a:active,   .lucidac_lh a:hover
+ { font-family:"Lucida Console", monospace; }
+.palatino,      .palatino_a:active,     .palatino_h:hover,
+.palatino_l a,  .palatino_la a:active,  .palatino_lh a:hover
+ { font-family:"Palatino", "Palatino Linotype", serif; }
+.tahoma,        .tahoma_a:active,       .tahoma_h:hover,
+.tahoma_l a,    .tahoma_la a:active,    .tahoma_lh a:hover
+ { font-family:"Tahoma", sans-serif; }
+.times,         .times_a:active,        .times_h:hover,
+.times_l a,     .times_la a:active,     .times_lh a:hover
+ { font-family:"Times", serif; }
+.timesnr,       .timesnr_a:active,      .timesnr_h:hover,
+.timesnr_l a,   .timesnr_la a:active,   .timesnr_lh a:hover
+ { font-family:"Times New Roman", serif; }
+.trebuchet,     .trebuchet_a:active,    .trebuchet_h:hover,
+.trebuchet_l a, .trebuchet_la a:active, .trebuchet_lh a:hover
+ { font-family:"Trebuchet", sans-serif; }
+.verdana,       .verdana_a:active,      .verdana_h:hover,
+.verdana_l a,   .verdana_la a:active,   .verdana_lh a:hover
+ { font-family:"Verdana", sans-serif; }
+
+/* 21: Font Styles */
+
+.b,     .b_a:active,    .b_h:hover,
+.b_l a, .b_la a:active, .b_lh a:hover { font-weight:bold; }
+.i,     .i_a:active,    .i_h:hover,
+.i_l a, .i_la a:active, .i_lh a:hover { font-style:italic; }
+.l,     .l_a:active,    .l_h:hover,
+.l_l a, .l_la a:active, .l_lh a:hover { text-decoration:overline; }
+.n,     .n_a:active,    .n_h:hover,
+.n_l a, .n_la a:active, .n_lh a:hover { font-style:normal;
+                                        font-weight:normal;
+                                        text-decoration:none; }
+.o,     .o_a:active,    .o_h:hover,
+.o_l a, .o_la a:active, .o_lh a:hover { font-style:oblique; }
+.u,     .u_a:active,    .u_h:hover,
+.u_l a, .u_la a:active, .u_lh a:hover { text-decoration:underline; }
+.t,     .t_a:active,    .t_h:hover,
+.t_l a, .t_la a:active, .t_lh a:hover { text-decoration:line-through; }
+.w,     .w_a:active,    .w_h:hover,
+.w_l a, .w_la a:active, .w_lh a:hover { text-decoration:blink;/* NotIE */
+                                        font-weight:bold\0;   /* IE */ }
+
+/* 22: Text Alignment */
+
+.leftjustify,      .leftjustify_a:active,      .leftjustify_h:hover,
+.leftjustify_l a,  .leftjustify_la a:active,   .leftjustify_lh a:hover,
+.lj,               .lj_a:active,               .lj_h:hover,
+.lj_l a,           .lj_la a:active,            .lj_lh a:hover
+   { text-align:left;    }
+.center,           .center_a:active,          .center_h:hover,
+.center_l a,       .center_la a:active,       .center_lh a:hover,
+.c,                .c_a:active,               .c_h:hover,
+.c_l a,            .c_la a:active,            .c_lh a:hover
+   { text-align:center;  }
+.rightjustify,     .rightjustify_a:active,    .rightjustify_h:hover,
+.rightjustify_l a, .rightjustify_la a:active, .rightjustify_lh a:hover,
+.rj,               .rj_a:active,              .rj_h:hover,
+.rj_l a,           .rj_la a:active,           .rj_lh a:hover
+   { text-align:right;   }
+.justify,          .justify_a:active,         .justify_h:hover,
+.justify_l a,      .justify_la a:active,      .justify_lh a:hover,
+.j,                .j_a:active,               .j_h:hover,
+.j_l a,            .j_la a:active,            .j_lh a:hover
+   { text-align:justify; }
+
+/* 23: Text Point Size */
+
+.pt1,      .pt1_a:active,      .pt1_h:hover,
+.pt1_l a,  .pt1_la a:active,   .pt1_lh a:hover   { font-size:1pt;  }
+.pt2,      .pt2_a:active,      .pt2_h:hover,
+.pt2_l a,  .pt2_la a:active,   .pt2_lh a:hover   { font-size:2pt;  }
+.pt3,      .pt3_a:active,      .pt3_h:hover,
+.pt3_l a,  .pt3_la a:active,   .pt3_lh a:hover   { font-size:3pt;  }
+.pt4,      .pt4_a:active,      .pt4_h:hover,
+.pt4_l a,  .pt4_la a:active,   .pt4_lh a:hover   { font-size:4pt;  }
+.pt5,      .pt5_a:active,      .pt5_h:hover,
+.pt5_l a,  .pt5_la a:active,   .pt5_lh a:hover   { font-size:5pt;  }
+.pt6,      .pt6_a:active,      .pt6_h:hover,
+.pt6_l a,  .pt6_la a:active,   .pt6_lh a:hover   { font-size:6pt;  }
+.pt7,      .pt7_a:active,      .pt7_h:hover,
+.pt7_l a,  .pt7_la a:active,   .pt7_lh a:hover   { font-size:7pt;  }
+.pt8,      .pt8_a:active,      .pt8_h:hover,
+.pt8_l a,  .pt8_la a:active,   .pt8_lh a:hover   { font-size:8pt;  }
+.pt9,      .pt9_a:active,      .pt9_h:hover,
+.pt9_l a,  .pt9_la a:active,   .pt9_lh a:hover   { font-size:9pt;  }
+.pt10,     .pt10_a:active,     .pt10_h:hover,
+.pt10_l a, .pt10_l a:active,   .pt10_lh a:hover  { font-size:10pt; }
+.pt11,     .pt11_a:active,     .pt11_h:hover,
+.pt11_l a, .pt11_la a:active,  .pt11_lh a:hover  { font-size:11pt; }
+.pt12,     .pt12_a:active,     .pt12_h:hover,
+.pt12_l a, .pt12_la a:active,  .pt12_lh a:hover  { font-size:12pt; }
+.pt13,     .pt13_a:active,     .pt13_h:hover,
+.pt13_l a, .pt13_la a:active,  .pt13_lh a:hover  { font-size:13pt; }
+.pt14,     .pt14_a:active,     .pt14_h:hover,
+.pt14_l a, .pt14_la a:active,  .pt14_lh a:hover  { font-size:14pt; }
+.pt15,     .pt15_a:active,     .pt15_h:hover,
+.pt15_l a, .pt15_la a:active,  .pt15_lh a:hover  { font-size:15pt; }
+.pt16,     .pt16_a:active,     .pt16_h:hover,
+.pt16_l a, .pt16_la a:active,  .pt16_lh a:hover  { font-size:16pt; }
+.pt17,     .pt17_a:active,     .pt17_h:hover,
+.pt17_l a, .pt17_la a:active,  .pt17_lh a:hover  { font-size:17pt; }
+.pt18,     .pt18_a:active,     .pt18_h:hover,
+.pt18_l a, .pt18_la a:active,  .pt18_lh a:hover  { font-size:18pt; }
+.pt19,     .pt19_a:active,     .pt19_h:hover,
+.pt19_l a, .pt19_la a:active,  .pt19_lh a:hover  { font-size:19pt; }
+.pt20,     .pt20_a:active,     .pt20_h:hover,
+.pt20_l a, .pt20_la a:active,  .pt20_lh a:hover  { font-size:20pt; }
+.pt25,     .pt25_a:active,     .pt25_h:hover,
+.pt25_l a, .pt25_la a:active,  .pt25_lh a:hover  { font-size:25pt; }
+.pt30,     .pt30_a:active,     .pt30_h:hover,
+.pt30_l a, .pt30_la a:active,  .pt30_lh a:hover  { font-size:30pt; }
+.pt35,     .pt35_a:active,     .pt35_h:hover,
+.pt35_l a, .pt35_la a:active,  .pt35_lh a:hover  { font-size:35pt; }
+.pt40,     .pt40_a:active,     .pt40_h:hover,
+.pt40_l a, .pt40_la a:active,  .pt40_lh a:hover  { font-size:40pt; }
+.pt45,     .pt45_a:active,     .pt45_h:hover,
+.pt45_l a, .pt45_la a:active,  .pt45_lh a:hover  { font-size:45pt; }
+.pt50,     .pt50_a:active,     .pt50_h:hover,
+.pt50_l a, .pt50_la a:active,  .pt50_lh a:hover  { font-size:50pt; }
+.pt60,     .pt60_a:active,     .pt60_h:hover,
+.pt60_l a, .pt60_la a:active,  .pt60_lh a:hover  { font-size:60pt; }
+.pt70,     .pt70_a:active,     .pt70_h:hover,
+.pt70_l a, .pt70_la a:active,  .pt70_lh a:hover  { font-size:70pt; }
+.pt80,     .pt80_a:active,     .pt80_h:hover,
+.pt80_l a, .pt80_la a:active,  .pt80_lh a:hover  { font-size:80pt; }
+.pt90,     .pt90_a:active,     .pt90_h:hover,
+.pt90_l a, .pt90_la a:active,  .pt90_lh a:hover  { font-size:90pt; }
+.pt100,    .pt100_a:active,    .pt100_h:hover,
+.pt100_l a,.pt100_la a:active, .pt100_lh a:hover { font-size:100pt;}
+
+/* 24: Text Colors */
+
+.aqua,        .aqua_a:active,       .aqua_h:hover,
+.aqua_l a,    .aqua_la a:active,    .aqua_lh a:hover    { color:#0ff; }
+.black,       .black_a:active,      .black_h:hover,
+.black_l a,   .black_la a:active,   .black_lh a:hover   { color:#000; }
+.blue,        .blue_a:active,       .blue_h:hover,
+.blue_l a,    .blue_la a:active,    .blue_lh a:hover    { color:#00f; }
+.brown,       .brown_a:active,      .brown_h:hover,
+.brown_l a,   .brown_la a:active,   .brown_lh a:hover   { color:#c44; }
+.fuchsia,     .fuchsia_a:active,    .fuchsia_h:hover,
+.fuchsia_l a, .fuchsia_la a:active, .fuchsia_lh a:hover { color:#f0f; }
+.gold,        .gold_a:active,       .gold_h:hover,
+.gold_l a,    .gold_la a:active,    .gold_lh a:hover    { color:#fc0; }
+.gray,        .gray_a:active,       .gray_h:hover,
+.gray_l a,    .gray_la a:active,    .gray_lh a:hover    { color:#888; }
+.green,       .green_a:active,      .green_h:hover,
+.green_l a,   .green_la a:active,   .green_lh a:hover   { color:#080; }
+.khaki,       .khaki_a:active,      .khaki_h:hover,
+.khaki_l a,   .khaki_la a:active,   .khaki_lh a:hover   { color:#cc8; }
+.lime,        .lime_a:active,       .lime_h:hover,
+.lime_l a,    .lime_la a:active,    .lime_lh a:hover    { color:#0f0; }
+.maroon,      .maroon_a:active,     .maroon_h:hover,
+.maroon_l a,  .maroon_la a:active,  .maroon_lh a:hover  { color:#800; }
+.navy,        .navy_a:active,       .navy_h:hover,
+.navy_l a,    .navy_la a:active,    .navy_lh a:hover    { color:#008; }
+.olive,       .olive_a:active,      .olive_h:hover,
+.olive_l a,   .olive_la a:active,   .olive_lh a:hover   { color:#880; }
+.orange,      .orange_a:active,     .orange_h:hover,
+.orange_l a,  .orange_la a:active,  .orange_lh a:hover  { color:#f80; }
+.pink,        .pink_a:active,       .pink_h:hover,
+.pink_l a,    .pink_la a:active,    .pink_lh a:hover    { color:#f88; }
+.purple,      .purple_a:active,     .purple_h:hover,
+.purple_l a,  .purple_la a:active,  .purple_lh a:hover  { color:#808; }
+.red,         .red_a:active,        .red_h:hover,
+.red_l a,     .red_la a:active,     .red_lh a:hover     { color:#f00; }
+.silver,      .silver_a:active,     .silver_h:hover,
+.silver_l a,  .silver_la a:active,  .silver_lh a:hover  { color:#ccc; }
+.teal,        .teal_a:active,       .teal_h:hover,
+.teal_l a,    .teal_la a:active,    .teal_lh a:hover    { color:#088; }
+.white,       .white_a:active,      .white_h:hover,
+.white_l a,   .white_la a:active,   .white_lh a:hover   { color:#fff; }
+.yellow,      .yellow_a:active,     .yellow_h:hover,
+.yellow_l a,  .yellow_la a:active,  .yellow_lh a:hover  { color:#ff0; }
+
+/* 25: Text Shadows */
+
+.shadow,                     .shadow_a:active,
+.shadow_h:hover,             .shadow_l a,
+.shadow_la a:active,         .shadow_lh a:hover {
+   text-shadow:#888888 3px 3px 4px;
+   filter     :progid:DXImageTransform.Microsoft.Shadow(
+               color='#888888', Direction=135, Strength=5); 
+}
+.lightestshadow,             .lightestshadow_a:active,
+.lightestshadow_h:hover,     .lightestshadow_l a,
+.lightestshadow_la a:active, .lightestshadow_lh a:hover {
+   text-shadow:#ffffff 3px 3px 4px;
+   filter     :progid:DXImageTransform.Microsoft.Shadow(
+               color='#ffffff', Direction=135, Strength=5);
+}
+.lightshadow,                .lightshadow_a:active,
+.lightshadow_h:hover,        .lightshadow_l a,
+.lightshadow_la a:active,    .lightshadow_lh a:hover {
+   text-shadow:#cccccc 3px 3px 4px;
+   filter     :progid:DXImageTransform.Microsoft.Shadow(
+               color='#cccccc', Direction=135, Strength=5);
+}
+.darkshadow,                 .darkshadow_a:active,
+.darkshadow_h:hover,         .darkshadow_l a,
+.darkshadow_la a:active,     .darkshadow_lh a:hover {
+   text-shadow:#444444 3px 3px 4px;
+   filter     :progid:DXImageTransform.Microsoft.Shadow(
+               color='#444444', Direction=135, Strength=5);
+}
+.darkestshadow,              .darkestshadow_a:active,
+.darkestshadow_h:hover,      .darkestshadow_l a,
+.darkestshadow_la a:active,  .darkestshadow_lh a:hover {
+   text-shadow:#000000 3px 3px 4px;
+   filter     :progid:DXImageTransform.Microsoft.Shadow(
+               color='#000000', Direction=135, Strength=5);
+}
+
+/* 26: Text Transformations */
+
+.caps,      .caps_a:active,     .caps_h:hover,
+.caps_l a,  .caps_la a:active,  .caps_lh a:hover
+   { text-transform:capitalize; }
+.scaps,     .scaps_a:active,    .scaps_h:hover,
+.scaps_l a, .scaps_la a:active, .scaps_lh a:hover
+   { font-variant  :small-caps; }
+.lower,     .lower_a:active,    .lower_h:hover,
+.lower_l a, .lower_la a:active, .lower_lh a:hover
+   { text-transform:lowercase;  }
+.upper,     .upper_a:active,    .upper_h:hover,
+.upper_l a, .upper_la a:active, .upper_lh a:hover
+   { text-transform:uppercase;  }
+
+/* 27: Encapsulation */
+
+.quotes:before,   .quotes_h:hover:before   { content:'\201c'; }
+.quotes:after,    .quotes_h:hover:after    { content:'\201d'; }
+.parens:before,   .parens_h:hover:before   { content:'('; }
+.parens:after,    .parens_h:hover:after    { content:')'; }
+.brackets:before, .brackets_h:hover:before { content:'['; }
+.brackets:after,  .brackets_h:hover:after  { content:']'; }
+.braces:before,   .braces_h:hover:before   { content:'{'; }
+.braces:after,    .braces_h:hover:after    { content:'}'; }
+.chevrons:before, .chevrons_h:hover:before { content:'<'; }
+.chevrons:after,  .chevrons_h:hover:after  { content:'>'; }
+
+/* 28: Google Fonts */
+
+.cantarell,       .cantarell_a:active,     .cantarell_h:hover,
+.cantarell_l a,   .cantarell_la a:active   .cantarell_lh a:hover
+   { font-family:"Cantarell", sans-serif; }
+.cardo,           .cardo_a:active,         .cardo_h:hover,
+.cardo_l a,       .cardo_la a:active       .cardo_lh a:hover
+   { font-family:"Cardo", serif; }
+.crimson,         .crimson_a:active,       .crimson_h:hover,
+.crimson_l a,     .crimson_la a:active     .crimson_lh a:hover
+   { font-family:"Crimson Text", serif; }
+.droidsans,       .droidsans_a:active,     .droidsans_h:hover,
+.droidsans_l a,   .droidsans_la a:active   .droidsans_lh a:hover
+   { font-family:"Droid Sans", sans-serif; }
+.droidsansm,      .droidsansm_a:active,    .droidsansm_h:hover,
+.droidsansm_l a,  .droidsansm_la a:active  .droidsansm_lh a:hover
+   { font-family:"Droid Sans Mono", monospace; }
+.droidserif,      .droidserif_a:active,    .droidserif_h:hover,
+.droidserif_l a,  .droidserif_la a:active  .droidserif_lh a:hover
+   { font-family:"Droid Serif", serif; }
+.imfell,          .imfell_a:active,        .imfell_h:hover,
+.imfell_l a,      .imfell_la a:active      .imfell_lh a:hover
+   { font-family:"IM Fell English", serif; }
+.inconsolata,     .inconsolata_a:active,   .inconsolata_h:hover,
+.inconsolata_l a, .inconsolata_la a:active .inconsolata_lh a:hover
+   { font-family:"Inconsolata", monospace; }
+.josefin,         .josefin_a:active,       .josefin_h:hover,
+.josefin_l a,     .josefin_la a:active     .josefin_lh a:hover
+   { font-family:"Josefin Sans Std Light", sans-serif; }
+.lobster,         .lobster_a:active,       .lobster_h:hover,
+.lobster_l a,     .lobster_la a:active     .lobster_lh a:hover
+   { font-family:"Lobster", fantasy, serif; }
+.molengo,         .molengo_a:active,       .molengo_h:hover,
+.molengo_l a,     .molengo_la a:active     .molengo_lh a:hover
+   { font-family:"Molengo", sans-serif; }
+.neuton,          .neuton_a:active,        .neuton_h:hover,
+.neuton_l a,      .neuton_la a:active      .neuton_lh a:hover
+   { font-family:"Neuton", sans-serif; }
+.nobile,          .nobile_a:active,        .nobile_h:hover,
+.nobile_l a,      .nobile_la a:active      .nobile_lh a:hover
+   { font-family:"Nobile", sans-serif; }
+.oflsorts,        .oflsorts_a:active,      .oflsorts_h:hover,
+.oflsorts_l a,    .oflsorts_la a:active    .oflsorts_lh a:hover
+   { font-family:"OFL Sorts Mill Goudy TT", serif; }
+.oldstandard,     .oldstandard_a:active,   .oldstandard_h:hover,
+.oldstandard_l a, .oldstandard_la a:active .oldstandard_lh a:hover
+   { font-family:"Old Standard TT", serif; }
+.reenie,          .reenie_a:active,        .reenie_h:hover,
+.reenie_l a,      .reenie_la a:active      .reenie_lh a:hover
+   { font-family:"Reenie Beanie", cursive, serif; }
+.tangerine,       .tangerine_a:active,     .tangerine_h:hover,
+.tangerine_l a,   .tangerine_la a:active   .tangerine_lh a:hover
+   { font-family:"Tangerine", cursive, serif; }
+.vollkorn,        .vollkorn_a:active,      .vollkorn_h:hover,
+.vollkorn_l a,    .vollkorn_la a:active    .vollkorn_lh a:hover
+   { font-family:"Vollkorn", serif; }
+.yanone,          .yanone_a:active,        .yanone_h:hover,
+.yanone_l a,      .yanone_la a:active      .yanone_lh a:hover
+   { font-family:"Yanone Kaffeesatz", sans-serif; }
+
+/* 29: Drop Cap */
+
+.dropcap, .dropcap_h:hover {
+   font-size:500%;
+   line-height:0.8em;
+   margin-right:0.04em;
+   margin-bottom:-0.15em;
+   float:left;
+}
+
+/* 30: Columns */
+
+.columns2, .columns2_h:hover {
+   -moz-column-rule:    dashed 1px #888888;
+   -webkit-column-rule: dashed 1px #888888;
+   -o-column-rule:      dashed 1px #888888;
+   column-rule:         dashed 1px #888888;
+   -moz-column-gap:     20px;
+   -webkit-column-gap:  20px;
+   -o-column-gap:       20px;
+   column-gap:          20px;
+   -moz-column-count:   2;
+   -webkit-column-count:2;
+   -o-column-count:     2;
+   column-count:        2;
+}
+.columns3, .columns3_h:hover {
+   -moz-column-rule:    dashed 1px #888888;
+   -webkit-column-rule: dashed 1px #888888;
+   -o-column-rule:      dashed 1px #888888;
+   column-rule:         dashed 1px #888888;
+   -moz-column-gap:     20px;
+   -webkit-column-gap:  20px;
+   -o-column-gap:       20px;
+   column-gap:          20px;
+   -moz-column-count:   3;
+   -webkit-column-count:3;
+   -o-column-count:     3;
+   column-count:        3;
+}
+.columns4, .columns4_h:hover {
+   -moz-column-rule:    dashed 1px #888888;
+   -webkit-column-rule: dashed 1px #888888;
+   -o-column-rule:      dashed 1px #888888;
+   column-rule:         dashed 1px #888888;
+   -moz-column-gap:     20px;
+   -webkit-column-gap:  20px;
+   -o-column-gap:       20px;
+   column-gap:          20px;
+   -moz-column-count:   4;
+   -webkit-column-count:4;
+   -o-column-count:     4;
+   column-count:        4;
+}
+.columns5, .columns5_h:hover {
+   -moz-column-rule:    dashed 1px #888888;
+   -webkit-column-rule: dashed 1px #888888;
+   -o-column-rule:      dashed 1px #888888;
+   column-rule:         dashed 1px #888888;
+   -moz-column-gap:     20px;
+   -webkit-column-gap:  20px;
+   -o-column-gap:       20px;
+   column-gap:          20px;
+   -moz-column-count:   5;
+   -webkit-column-count:5;
+   -o-column-count:     5;
+   column-count:        5;
+}
+
+/* 31: Text Indent */
+
+.indent1,  .indent1_h:hover  { text-indent:1%;  }
+.indent2,  .indent2_h:hover  { text-indent:2%;  }
+.indent3,  .indent3_h:hover  { text-indent:3%;  }
+.indent4,  .indent4_h:hover  { text-indent:4%;  }
+.indent5,  .indent5_h:hover  { text-indent:5%;  }
+.indent6,  .indent6_h:hover  { text-indent:6%;  }
+.indent7,  .indent7_h:hover  { text-indent:7%;  }
+.indent8,  .indent8_h:hover  { text-indent:8%;  }
+.indent9,  .indent9_h:hover  { text-indent:9%;  }
+.indent10, .indent10_h:hover { text-indent:10%; }
+
+/* 32: Symbols */
+
+.check:before, .check_h:before, .check_h:hover:before {
+   font-family:Courier;
+   font-weight:bold;
+   content:'\2713 ';
+   color:#008800;
+}
+.cross:before, .cross_h:before, .cross_h:hover:before {
+   font-family:Courier;
+   font-weight:bold;
+   content:'\2715 ';
+   color:#ff0000;
+}
+.email:before, .email_h:before, .email_h:hover:before {
+   font-family:Courier;
+   content:'\2709 ';
+   color:#0066ff;
+}
+.star:before, .star_h:before, .star_h:hover:before {
+   font-family:Courier;
+   content:'\2730 ';
+   color:#888800;
+}
+.check_h:before, .cross_h:before, .email_h:before, .star_h:before {
+   opacity:.5;
+   filter:alpha(opacity = '50');
+}
+.check_h:hover:before, .cross_h:hover:before, .email_h:hover:before,
+.star_h:hover:before {
+   opacity:1;
+   filter:alpha(opacity = '100');
+}
+
+/***********************************/
+/* Chapter 5: Menus and Navigation */
+/***********************************/
+
+/* 33: Buttons */
+
+.button {
+   padding:8px;
+}
+.button:hover {
+   border:2px solid #666666;
+   padding:7px 8px 8px 7px;
+}
+.button:active {
+   border-width:2px 1px 1px 2px;
+   padding:9px 7px 7px 9px;
+}
+.smallbutton {
+   font-size:75%;
+   padding:2px;
+}
+.smallbutton:hover { 
+   border:2px solid #666666;
+   padding:1px 2px 2px 1px;
+}
+.smallbutton:active {
+   border-width:2px 1px 1px 2px;
+   padding:3px 1px 1px 3px; 
+}
+.largebutton {
+   font-size:125%;
+   padding:15px;
+}
+.largebutton:hover {
+   border:2px solid #666666;
+   padding:14px 15px 15px 14px;
+}
+.largebutton:active {
+   border-width:2px 1px 1px 2px;
+   padding:16px 14px 14px 16px;
+}
+.button, .smallbutton, .largebutton {
+   text-align:center;
+   border-color:#999999;      
+   border-width:1px 2px 2px 1px;
+   vertical-align:top;
+   border-style:solid; /* Required by Opera */
+   width:auto;         /* Required by IE to not pad the sides */
+   overflow:visible;
+}
+
+/* 34: Vertical Menu */
+
+.vmenu, .hmenu {
+   width:150px;
+}
+.vmenu a, .hmenu a {
+   display:table-cell;
+   width:150px;
+   text-decoration:none;
+}
+.vmenu ul, .hmenu ul {
+   border:1px solid #000;
+   margin:0px;
+   padding:0px;
+}
+.vmenu ul li, .hmenu ul li {
+   height:25px;
+   line-height:25px; 
+   list-style:none; 
+   padding-left:10px;
+}
+.vmenu ul li:hover, .hmenu ul li:hover {
+   position:relative;
+}
+.vmenu ul ul, .hmenu ul ul {
+   display:none;
+   position:absolute;
+}
+.vmenu ul ul {
+   left:125px;
+   top:5px;
+}
+.vmenu ul li:hover ul, .hmenu ul li:hover ul {
+   z-index:1;
+}
+.vmenu ul li:hover ul {
+   display:block;
+}
+.vmenu ul ul li, .hmenu ul ul li {
+   width:150px;
+   float:left;
+}
+.vmenu ul ul li {
+   display:block;
+}
+.vmenu li:hover ul li ul, .hmenu li:hover ul li ul {
+   display:none;
+}
+.vmenu ul ul li ul, .hmenu ul ul li ul {
+   left:137px;
+}
+.vmenu ul ul li:hover ul, .hmenu ul ul li:hover ul {
+   z-index:1;
+}
+.vmenu ul ul li:hover ul {
+   display:block;
+}
+.vmenu1:after, .hmenu1 .hmenu1:after {
+   position:relative;
+   top:-25px;
+   float:right;
+   z-index:0;
+   margin-right:10px;
+   content:'\0bb';
+}
+            
+/* 35: Horizontal Menu */
+
+.hmenu, .hmenu ul, .hmenu ul li, .hmenu ul li:hover ul, .hmenu ul ul li,
+.hmenu ul ul li:hover ul {
+   display:inline;
+}
+.hmenu ul ul {
+   left:5px;
+   top:15px;
+}
+.hmenu ul ul li ul {
+   top:5px;
+}
+
+/* 36: Top Dock Bar */
+
+.topdockbar, .bottomdockbar {
+  position:fixed;
+  left:50%;
+  margin-left:-159px;   /* Set to (total width of reduced images) / 2 */
+                        /*      + (actual width -  reduced width) / 4 */
+}
+.topdockitem, .bottomdockitem {
+   -moz-transition:   all .2s;
+   -webkit-transition:all .2s;
+   -o-transition:     all .2s;
+   transition:        all .2s;
+   vertical-align:top;
+   width: 50px;         /* Set to reduced image width  */
+   height:50px;         /* Set to reduced image height */
+}
+.topdockitem:hover, .bottomdockitem:hover {
+   width: 86px;         /* Set to actual image width  */
+   height:86px;         /* Set to actual image height */
+}
+
+/* 37: Bottom Dock Bar */
+
+.bottomdockbar {
+  top:100%;
+  margin-top:-93px;     /* Set to -(actual image height + 7) */
+}
+.bottomdockitem {
+   padding-top:36px;    /* Set to (actual height) - (reduced height) */
+}
+.bottomdockitem:hover {
+   padding-top:0px;
+}
+
+/* 38: Tooltip */
+
+.tooltip:hover, .tooltipfade:hover {
+   text-decoration:none;
+	position:relative;
+}			
+.tooltip span {
+	display:none;
+}
+.tooltip:hover span {
+   display:block;
+   position:absolute;
+   top:40px;
+   left:0px;
+   white-space:nowrap;
+   background:#ffffdd;
+   border:1px solid #888888;
+   color:#444444;
+   font-family:Arial, Helvetica, sans-serif;
+   font-size:8pt;
+   line-height:95%;
+   padding:2px 5px;
+}
+
+.tooltipfade span {
+   position:absolute;
+   white-space:nowrap;
+   font-family:Arial, Helvetica, sans-serif;
+   font-size:8pt;
+   line-height:95%;
+   padding:2px 5px;
+   top:0px;
+   top:-10000px\0; /* IE hack to keep it out of the way */
+   left:0px;
+   background:#ffffdd;
+   border:1px solid #888888;
+   color:#444444;
+   opacity:0;
+   z-index:-1000;
+   filter:alpha(opacity = '0');
+}
+.tooltipfade:hover span {
+   -moz-transition   :all .5s linear;
+   -webkit-transition:all .5s linear;
+   -o-transition     :all .5s linear;
+   transition        :all .5s linear;
+   opacity:1;
+   filter:alpha(opacity = '100');
+   top:40px;
+   z-index:1000;
+}
+
+/**************************/
+/* Chapter 6: Page Layout */
+/**************************/
+
+/* 39: Reset */
+
+.reset a,          .reset abbr,     .reset acronym,
+.reset address,    .reset applet,   .reset big,
+.reset blockquote, .reset body,     .reset caption,
+.reset cite,       .reset code,     .reset dd,
+.reset del,        .reset dl,       .reset dfn,
+.reset div,        .reset dt,       .reset em,
+.reset fieldset,   .reset font,     .reset form,
+.reset h1,         .reset h2,       .reset h3,
+.reset h4,         .reset h5,       .reset h6,
+.reset html,       .reset iframe,   .reset img,
+.reset ins,        .reset kbd,      .reset label,
+.reset legend,     .reset li,       .reset object,
+.reset ol,         .reset p,        .reset pre,
+.reset span,       .reset q,        .reset s,
+.reset samp,       .reset small,    .reset strike,
+.reset strong,     .reset sub,      .reset sup,
+.reset table,      .reset tbody,    .reset td,
+.reset tfoot,      .reset th,       .reset thead,
+.reset tr,         .reset tt,       .reset ul,
+.reset var { 
+   margin         :0;
+   padding        :0;
+   border         :0;
+   outline        :0;
+   font-family    :inherit;
+   font-style     :inherit;
+   font-weight    :inherit;
+   font-size      :100%;
+   vertical-align :baseline;
+}
+.reset address,    .reset ar,       .reset caption,
+.reset cite,       .reset code,     .reset dfn,
+.reset em,         .reset strong,   .reset th,
+.reset v {
+   font-style     :normal;
+   font-weight    :normal;
+}
+.reset h1,         .reset h2,       .reset h3,
+.reset h4,         .reset h5,       .reset h6 {
+   font-weight    :normal;
+   font-size      :100%;
+}
+.reset blockquote:after, .reset blockquote:before,
+.reset q:after,    .reset q:before {
+   content        :'';
+}
+.reset caption,    .reset th,       .reset td {
+   font-weight    :normal;
+   text-align     :left; 
+}
+.reset             .reset fieldset, .reset img { 
+   border         :0; 
+}
+.reset abbr,       .reset acronym {
+   border         :0;
+}
+.reset ol,         .reset ul {
+   list-style     :none; 
+}
+.reset body {
+   line-height    :1;
+   background     :#ffffff;
+   color          :#000000; 
+}
+.reset table {
+   border-collapse:separate;
+   border-spacing :0;
+}
+.reset:focus {
+   outline        :0;
+}
+
+/* 40: Default */
+
+.default address,    .default blockquote, .default body,
+.default center,     .default dd,         .default dir,
+.default div,        .default dl,         .default dt,
+.default fieldset,   .default form,       .default frame,
+.default frameset,   .default h1,         .default h2,
+.default h3,         .default h4,         .default h5,
+.default h6,         .default hr,         .default html,
+.default menu,       .default noframes,   .default ol,
+.default p,          .default pre,        .default ul
+   { display:block; }
+.default blockquote, .default dir,        .default dl,
+.default fieldset,   .default form,       .default h4,
+.default menu,       .default ol,         .default p,
+.default ul
+   { margin:1.12em 0;}
+.default b,          .default h1,         .default h2,
+.default h3,         .default h4,         .default h5,
+.default h6,         .default strong
+   { font-weight:bolder; }
+.default address,    .default cite,       .default em,
+.default i,          .default var
+   { font-style:italic; }
+.default code,       .default kbd,        .default pre,
+.default samp,       .default tt
+   { font-family:monospace; }
+.default dd,         .default dir,        .default menu,
+.default ol,         .default ul
+   { margin-left:40px; }
+.default button,     .default input,      .default select,
+.default textarea
+   { display:inline-block; }
+.default ol ol,      .default ol ul,      .default ul ol,
+.default ul ul
+   { margin-top:0; margin-bottom:0; }
+.default del,        .default s,          .default strike
+   { text-decoration:line-through; }
+.default small,      .default sub,        .default sup
+   { font-size:0.83em; }
+.default tbody,      .default tfoot,      .default thead
+   { vertical-align :middle; }
+.default td,         .default th,         .default tr
+   { vertical-align :inherit; }
+.default ins,        .default u
+   { text-decoration:underline; }
+.default td,         .default th
+   { display:table-cell; padding:2px; }
+.default a:active,   .default a:link
+   { text-decoration:underline; color:#0000ff; }
+.default big
+   { font-size:1.17em; }
+.default blockquote
+   { margin-left:40px; margin-right:40px; }
+.default body
+   { margin:8px; }
+.default br:before
+   { content:"\A"; white-space:pre-line; }
+.default caption
+   { display:table-caption; text-align:center; }
+.default center
+   { text-align:center; }
+.default col
+   { display:table-column; }
+.default colgroup
+   { display:table-column-group; }
+.default h1
+   { font-size:2em; margin:0.7em 0; }
+.default h2
+   { font-size:1.5em; margin:0.75em 0; }
+.default h3
+   { font-size:1.17em; margin:0.83em 0; }
+.default h5
+   { font-size:0.83em; margin:1.5em 0; }
+.default h6
+   { font-size:0.75em; margin:1.67em 0; }
+.default head
+   { display:none; }
+.default hr
+   { border:1px inset; }
+.default li
+   { display:list-item; }
+.default ol
+   { list-style-type:decimal; }
+.default table
+   { display:table; }
+.default tbody
+   { display:table-row-group; }
+.default tfoot
+   { display:table-footer-group; }
+.default th
+   { font-weight:bolder; text-align:center; }
+.default thead
+   { display:table-header-group;  }
+.default tr
+   { display:table-row; }
+.default pre
+   { white-space:pre; }
+.default sub
+   { vertical-align:sub;  }
+.default sup
+   { vertical-align:super; }
+.default table
+   { border-spacing:2px; }
+.default a:visited
+   { color:#800080; }
+.default :focus
+   { outline:thin dotted invert; }
+
+/* 41: Boxout */
+
+.boxout, .boxout_h:hover {
+	margin:2% 5%;
+	padding:1% 1.4%;
+	border:1px solid #888;
+	background:#eeeeee;
+}
+
+/* 42: Quote */
+
+.quote, .quote_h {
+   margin:2% 10%;
+   padding:1% 3%;
+   font-style:italic
+}
+.quote:before, .quote_h:hover:before  {
+   font-size:1500%;
+   font-family:Arial, serif;
+	content:'\201c';
+   position:relative;
+   left:-15%;
+   top:-1%;
+   line-height:0.7em;
+   margin-bottom:-2em;
+   color:#dddddd\0;   /* hack for IE only */
+   opacity:.1;
+   float:left;
+}
+
+/* 43: Left Sidebar */
+
+.leftsidebar {
+   padding:1% 1.4%;
+   margin-right:1%;
+   border:1px solid #888;
+   background:#eeeeee;
+   width:25%;
+   float:left;
+}
+
+/* 44: Right Sidebar */
+
+.rightsidebar {
+   padding:1% 1.4%;
+   margin-left:1%;
+   border:1px solid #888;
+   background:#eeeeee;
+   width:25%;
+   float:right;
+}
+
+/* 45: Page Break */
+
+.break { page-break-before:always; }
+
+/*****************************/
+/* Chapter 7: Visual Effects */
+/*****************************/
+
+/* 46: Star Rating */
+
+.starrating, .starrating_h {
+   position:relative;
+   color:#ffddcc;
+   width:65px;
+   font-size:10pt;
+}
+.starrating_h div {
+   display:none;
+}
+.starrating div, .starrating_h:hover div {
+   display:block;
+   position:absolute;
+   overflow:hidden;
+   color:#ff9900;
+   top:0px;
+   left:0px;
+}
+
+/* 47: Star Rating using images */
+
+.starratingi, .starratingi_h {
+   position:relative;
+   width:65px;
+   height:12px;
+   background:url(star1.gif) 0 0 repeat-x;
+}
+.starratingi div, .starratingi_h:hover div {
+   position:absolute;
+   height:12px;
+   background:url(star2.gif) 0 0 repeat-x;
+   top:0px;
+   left:0px;
+}
+
+/* 48: Progress Bar */
+
+.progress, .progress_h {
+   position:relative;
+   width:120px;
+   height:15px;
+}
+.progress div, .progress_h:hover div {
+   position:absolute;
+   height:15px;
+   top:0px;
+   left:0px;
+}
+
+/* 49: Scale Up */
+
+.scaleup1, .scaleup1_h:hover {
+   -moz-transform   :scale(1.1);
+   -webkit-transform:scale(1.1);
+   -o-transform     :scale(1.1);
+   transform        :scale(1.1);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.1', M22='1.1');
+}
+.scaleup2, .scaleup2_h:hover {
+   -moz-transform   :scale(1.2);
+   -webkit-transform:scale(1.2);
+   -o-transform     :scale(1.2);
+   transform        :scale(1.2);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.2', M22='1.2');
+}
+.scaleup3, .scaleup3_h:hover {
+   -moz-transform   :scale(1.3);
+   -webkit-transform:scale(1.3);
+   -o-transform     :scale(1.3);
+   transform        :scale(1.3);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.3', M22='1.3');
+}
+.scaleup4, .scaleup4_h:hover {
+   -moz-transform   :scale(1.4);
+   -webkit-transform:scale(1.4);
+   -o-transform     :scale(1.4);
+   transform        :scale(1.4);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.4', M22='1.4');
+}
+.scaleup5, .scaleup5_h:hover {
+   -moz-transform   :scale(1.5);
+   -webkit-transform:scale(1.5);
+   -o-transform     :scale(1.5);
+   transform        :scale(1.5);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.5', M22='1.5');
+}
+.scaleup6, .scaleup6_h:hover {
+   -moz-transform   :scale(1.6);
+   -webkit-transform:scale(1.6);
+   -o-transform     :scale(1.6);
+   transform        :scale(1.6);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.6', M22='1.6');
+}
+.scaleup7, .scaleup7_h:hover {
+   -moz-transform   :scale(1.7);
+   -webkit-transform:scale(1.7);
+   -o-transform     :scale(1.7);
+   transform        :scale(1.7);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.7', M22='1.7');
+}
+.scaleup8, .scaleup8_h:hover {
+   -moz-transform   :scale(1.8);
+   -webkit-transform:scale(1.8);
+   -o-transform     :scale(1.8);
+   transform        :scale(1.8);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.8', M22='1.8');
+}
+.scaleup9, .scaleup9_h:hover {
+  -moz-transform   :scale(1.9);
+   -webkit-transform:scale(1.9);
+   -o-transform     :scale(1.9);
+   transform        :scale(1.9);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1.9', M22='1.9');
+}
+.scaleup10, .scaleup10_h:hover {
+   -moz-transform   :scale(2);
+   -webkit-transform:scale(2);
+   -o-transform     :scale(2);
+   transform        :scale(2);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='2', M22='2');
+}
+
+.scaleup1_h, .scaleup2_h, .scaleup3_h, .scaleup4_h, .scaleup5_h,
+.scaleup6_h, .scaleup7_h, .scaleup8_h, .scaleup9_h, .scaleup10_h
+   { z-index:1; }
+
+/* 50: Scale Down */
+
+.scaledown1, .scaledown1_h:hover {
+   -moz-transform   :scale(0.9);
+   -webkit-transform:scale(0.9);
+   -o-transform     :scale(0.9);
+   transform        :scale(0.9);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.9', M22='0.9');
+}
+.scaledown2, .scaledown2_h:hover {
+   -moz-transform   :scale(0.8);
+   -webkit-transform:scale(0.8);
+   -o-transform     :scale(0.8);
+   transform        :scale(0.8);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.8', M22='0.8');
+}
+.scaledown3, .scaledown3_h:hover {
+   -moz-transform   :scale(0.7);
+   -webkit-transform:scale(0.7);
+   -o-transform     :scale(0.7);
+   transform        :scale(0.7);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.7', M22='0.7');
+}
+.scaledown4, .scaledown4_h:hover {
+   -moz-transform   :scale(0.6);
+   -webkit-transform:scale(0.6);
+   -o-transform     :scale(0.6);
+   transform        :scale(0.6);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.6', M22='0.6');
+}
+.scaledown5, .scaledown5_h:hover {
+   -moz-transform   :scale(0.5);
+   -webkit-transform:scale(0.5);
+   -o-transform     :scale(0.5);
+   transform        :scale(0.5);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.5', M22='0.5');
+}
+.scaledown6, .scaledown6_h:hover {
+   -moz-transform   :scale(0.4);
+   -webkit-transform:scale(0.4);
+   -o-transform     :scale(0.4);
+   transform        :scale(0.4);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.4', M22='0.4');
+}
+.scaledown7, .scaledown7_h:hover {
+   -moz-transform   :scale(0.3);
+   -webkit-transform:scale(0.3);
+   -o-transform     :scale(0.3);
+   transform        :scale(0.3);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.3', M22='0.3');
+}
+.scaledown8, .scaledown8_h:hover {
+   -moz-transform   :scale(0.2);
+   -webkit-transform:scale(0.2);
+   -o-transform     :scale(0.2);
+   transform        :scale(0.2);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.2', M22='0.2');
+}
+.scaledown9, .scaledown9_h:hover {
+   -moz-transform   :scale(0.1);
+   -webkit-transform:scale(0.1);
+   -o-transform     :scale(0.1);
+   transform        :scale(0.1);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0.1', M22='0.1');
+}
+.scaledown10, .scaledown10_h:hover {
+   -moz-transform   :scale(0);
+   -webkit-transform:scale(0);
+   -o-transform     :scale(0);
+   transform        :scale(0);
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0', M22='0');
+}
+
+/* 51: Transition All */
+
+.transitionall {
+   -moz-transition   :all .7s;
+   -webkit-transition:all .7s;
+   -o-transition     :all .7s;
+   transition        :all .7s;
+}
+.transitionallslowest {
+   -moz-transition   :all 2s;
+   -webkit-transition:all 2s;
+   -o-transition     :all 2s;
+   transition        :all 2s;
+}
+.transitionallslow {
+   -moz-transition   :all 1.5s;
+   -webkit-transition:all 1.5s;
+   -o-transition     :all 1.5s;
+   transition        :all 1.5s;
+}
+.transitionallfast {
+   -moz-transition   :all .3s;
+   -webkit-transition:all .3s;
+   -o-transition     :all .3s;
+   transition        :all .3s;
+}
+.transitionallfastest {
+   -moz-transition   :all .1s;
+   -webkit-transition:all .1s;
+   -o-transition     :all .1s;
+   transition        :all .1s;
+}
+.transitionall_l {
+   -moz-transition   :all .7s linear;
+   -webkit-transition:all .7s linear;
+   -o-transition     :all .7s linear;
+   transition        :all .7s linear;
+}
+.transitionallslowest_l {
+   -moz-transition   :all 2s linear;
+   -webkit-transition:all 2s linear;
+   -o-transition     :all 2s linear;
+   transition        :all 2s linear;
+}
+.transitionallslow_l {
+   -moz-transition   :all 1.5s linear;
+   -webkit-transition:all 1.5s linear;
+   -o-transition     :all 1.5s linear;
+   transition        :all 1.5s linear;
+}
+.transitionallfast_l {
+   -moz-transition   :all .3s linear;
+   -webkit-transition:all .3s linear;
+   -o-transition     :all .3s linear;
+   transition        :all .3s linear;
+}
+.transitionallfastest_l {
+   -moz-transition   :all .1s linear;
+   -webkit-transition:all .1s linear;
+   -o-transition     :all .1s linear;
+   transition        :all .1s linear;
+}
+
+/* 52: Thumb View */
+
+.thumbview {
+	position:relative;
+}			
+.thumbview span {
+   position:absolute;
+   top:-30px;
+   left:30px;
+   -moz-transition   :all .3s linear;
+   -webkit-transition:all .3s linear;
+   -o-transition     :all .3s linear;
+   transition        :all .3s linear;
+   -moz-transform:   scale(0);
+   -webkit-transform:scale(0);
+   -o-transform:     scale(0);
+   transform:        scale(0);
+   opacity:0;
+   z-index:0;
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='0', M22='0');
+}
+.thumbview:hover span {
+   -moz-transform:   scale(1);
+   -webkit-transform:scale(1);
+   -o-transform:     scale(1);
+   transform:        scale(1);
+   opacity:1;
+   z-index:100;
+   filter           :progid:DXImageTransform.Microsoft.Matrix(
+                     SizingMethod='auto expand', M11='1', M22='1');
+}
+
+@media all and (-webkit-min-device-pixel-ratio:10000), /* Opera hack */
+   not all and (-webkit-min-device-pixel-ratio:0) {
+   .thumbview span { top:30px; } }
+
+/* 53: Caption Image */
+
+.caption, .caption_h {
+   position:relative;
+}
+.caption img, .caption_h img {
+   background:#000000;
+   padding:3px;
+}
+.caption img, .caption_h:hover img {
+   padding:0px;
+   border:3px solid #ffffff;
+   border:3px solid #eeeeee\0;                 /* IE hack */
+   -moz-box-shadow   :3px 5px 9px #444;
+   -webkit-box-shadow:3px 5px 9px #444;
+   box-shadow        :3px 5px 9px #444;
+}
+.caption:before\0, .caption_h:hover:before\0 { /* IE hack section */
+   position:absolute\0;
+   color:#eeeeee\0;
+   top:auto\0;
+   bottom:3px\0;
+   left:0px\0;
+   font-size:20pt\0;
+   font-weight:bold\0;
+   font-family:Impact\0;
+   content:'\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588\2588'; /* 1 long line */
+}
+.caption:after, .caption_h:hover:after {
+   position:absolute;
+   background:#ffffff;
+   color:#000000;
+   top:auto;
+   bottom:3px;
+   left:0px;
+   width:100%;
+   text-align:center;
+   height:30px;
+   line-height:30px;
+   font-size:8pt;
+   text-shadow:#888888 2px 2px 2px;
+   font-weight:bold;
+   font-family:Verdana, Helvetica, sans-serif;
+   content:attr(alt);
+   opacity:.9;
+}
+
+/* 54: Pointer */
+
+.pointer { cursor:pointer; }
+
+/* 55: Rotation */
+
+.rotatec90,.rotatec90_h:hover {
+   -webkit-transform:rotate(90deg);
+   -moz-transform   :rotate(90deg);
+   -o-transform     :rotate(90deg);
+   transform        :rotate(90deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+.rotatec180, .rotatec180_h:hover {
+   -webkit-transform:rotate(180deg);
+   -moz-transform   :rotate(180deg);
+   -o-transform     :rotate(180deg);
+   transform        :rotate(180deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+.rotatec270, .rotatec270_h:hover {
+   -webkit-transform:rotate(270deg);
+   -moz-transform   :rotate(270deg);
+   -o-transform     :rotate(270deg);
+   transform        :rotate(270deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.rotatea90,.rotatea90_h:hover {
+   -webkit-transform:rotate(-90deg);
+   -moz-transform   :rotate(-90deg);
+   -o-transform     :rotate(-90deg);
+   transform        :rotate(-90deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.rotatea180, .rotatea180_h:hover {
+   -webkit-transform:rotate(-180deg);
+   -moz-transform   :rotate(-180deg);
+   -o-transform     :rotate(-180deg);
+   transform        :rotate(-180deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+.rotatea270, .rotatea270_h:hover {
+   -webkit-transform:rotate(-270deg);
+   -moz-transform   :rotate(-270deg);
+   -o-transform     :rotate(-270deg);
+   transform        :rotate(-270deg);
+   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+
+/* 56: Odd & Even Text Colors */
+
+.aqua_o    tr:nth-child(odd),  .aqua_e     tr:nth-child(even)
+   { color:#0ff }
+.black_o   tr:nth-child(odd),  .black_e    tr:nth-child(even)
+   { color:#000 }
+.blue_o    tr:nth-child(odd),  .blue_e     tr:nth-child(even)
+   { color:#00f }
+.brown_o   tr:nth-child(odd),  .brown_e    tr:nth-child(even)
+   { color:#c44 }
+.fuchsia_o tr:nth-child(odd),  .fuchsia_e  tr:nth-child(even)
+   { color:#f0f }
+.gold_o    tr:nth-child(odd),  .gold_e     tr:nth-child(even)
+   { color:#fc0 }
+.gray_o    tr:nth-child(odd),  .gray_e     tr:nth-child(even)
+   { color:#888 }
+.green_o   tr:nth-child(odd),  .green_e    tr:nth-child(even)
+   { color:#080 }
+.khaki_o   tr:nth-child(odd),  .khaki_e    tr:nth-child(even)
+   { color:#cc8 }
+.lime_o    tr:nth-child(odd),  .lime_e     tr:nth-child(even)
+   { color:#0f0 }
+.maroon_o  tr:nth-child(odd),  .maroon_e   tr:nth-child(even)
+   { color:#800 }
+.navy_o    tr:nth-child(odd),  .navy_e     tr:nth-child(even)
+   { color:#008 }
+.olive_o   tr:nth-child(odd),  .olive_e    tr:nth-child(even)
+   { color:#880 }
+.orange_o  tr:nth-child(odd),  .orange_e   tr:nth-child(even)
+   { color:#f80 }
+.pink_o    tr:nth-child(odd),  .pink_e     tr:nth-child(even)
+   { color:#f88 }
+.purple_o  tr:nth-child(odd),  .purple_e   tr:nth-child(even)
+   { color:#808 }
+.red_o     tr:nth-child(odd),  .red_e      tr:nth-child(even)
+   { color:#f00 }
+.silver_o  tr:nth-child(odd),  .silver_e   tr:nth-child(even)
+   { color:#ccc }
+.teal_o    tr:nth-child(odd),  .teal_e     tr:nth-child(even)
+   { color:#088 }
+.white_o   tr:nth-child(odd),  .white_e    tr:nth-child(even)
+   { color:#fff }
+.yellow_o  tr:nth-child(odd),  .yellow_e   tr:nth-child(even)
+   { color:#ff0 }
+
+/* 57: Odd & Even Background Colors */
+
+.aqua_bo    tr:nth-child(odd), .aqua_be    tr:nth-child(even)
+   { background:#0ff }
+.black_bo   tr:nth-child(odd), .black_be   tr:nth-child(even)
+   { background:#000 }
+.blue_bo    tr:nth-child(odd), .blue_be    tr:nth-child(even)
+   { background:#00f }
+.brown_bo   tr:nth-child(odd), .brown_be   tr:nth-child(even)
+   { background:#c44 }
+.fuchsia_bo tr:nth-child(odd), .fuchsia_be tr:nth-child(even)
+   { background:#f0f }
+.gold_bo    tr:nth-child(odd), .gold_be    tr:nth-child(even)
+   { background:#fc0 }
+.gray_bo    tr:nth-child(odd), .gray_be    tr:nth-child(even)
+   { background:#888 }
+.green_bo   tr:nth-child(odd), .green_be   tr:nth-child(even)
+   { background:#080 }
+.khaki_bo   tr:nth-child(odd), .khaki_be   tr:nth-child(even)
+   { background:#cc8 }
+.lime_bo    tr:nth-child(odd), .lime_be    tr:nth-child(even)
+   { background:#0f0 }
+.maroon_bo  tr:nth-child(odd), .maroon_be  tr:nth-child(even)
+   { background:#800 }
+.navy_bo    tr:nth-child(odd), .navy_be    tr:nth-child(even)
+   { background:#008 }
+.olive_bo   tr:nth-child(odd), .olive_be   tr:nth-child(even)
+   { background:#880 }
+.orange_bo  tr:nth-child(odd), .orange_be  tr:nth-child(even)
+   { background:#f80 }
+.pink_bo    tr:nth-child(odd), .pink_be    tr:nth-child(even)
+   { background:#f88 }
+.purple_bo  tr:nth-child(odd), .purple_be  tr:nth-child(even)
+   { background:#808 }
+.red_bo     tr:nth-child(odd), .red_be     tr:nth-child(even)
+   { background:#f00 }
+.silver_bo  tr:nth-child(odd), .silver_be  tr:nth-child(even)
+   { background:#ccc }
+.teal_bo    tr:nth-child(odd), .teal_be    tr:nth-child(even)
+   { background:#088 }
+.white_bo   tr:nth-child(odd), .white_be   tr:nth-child(even)
+   { background:#fff }
+.yellow_bo  tr:nth-child(odd), .yellow_be  tr:nth-child(even)
+   { background:#ff0 }
+
+/**********************************/
+/* Chapters 8-12: Dynamic Classes */
+/*  58 - 100: See the file PC.js  */
+/**********************************/
+
