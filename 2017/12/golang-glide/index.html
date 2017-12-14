@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="孙广君的个人博客CodeHub">
+    <meta name="keyword" content="codehub,blog">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://omp4hichz.bkt.clouddn.com/codehub.ico">
+    <link rel="alternate" type="application/atom+xml" title="CodeHub" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Golang学习--包管理工具glide｜CodeHub
+        
+    </title>
+
+    <link rel="canonical" href="http://craryprimitiveman.github.io/2017/12/golang-glide/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    CodeHub
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                        
+                            
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                            
+                        
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Golang学习--包管理工具glide</h1>
+                    
+                    <span class="meta">
+                         作者 孙广君
+                        <span>
+                          日期 2017-12-14
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Golang,glide"
+                           title="Golang,glide">Golang,glide</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Golang学习--包管理工具glide
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>上一篇文章中我们已经成功的运行了go的代码，这是我们迈出的最基础的一步。</p>
+<p>一个项目通常会依赖很多外部的库，当依赖的库比较多的时候，手工管理就会比较麻烦，这个时候就需要包管理工具出场了，帮你管理好所有依赖的库。</p>
+<p>php项目中使用composer，javascript项目中使用npm，那么在go项目中，我们需要使用什么？</p>
+<h3 id="包依赖工具的选择"><a href="#包依赖工具的选择" class="headerlink" title="包依赖工具的选择"></a>包依赖工具的选择</h3><p>当前go的包管理工具有<a href="https://github.com/Masterminds/glide" target="_blank" rel="external">glide</a>、<a href="https://github.com/tools/godep" target="_blank" rel="external">godep</a>、<a href="https://github.com/kardianos/govendor" target="_blank" rel="external">govendor</a>和<a href="https://github.com/FiloSottile/gvt" target="_blank" rel="external">gvt</a>等，相关对比的文章可以查看<a href="https://studygolang.com/articles/10523" target="_blank" rel="external">《go依赖包管理工具对比》</a>。</p>
+<p>功能对比可以参考如下内容（虽然跟上面文章比较的工具有些不同），内容来自<a href="https://github.com/Masterminds/glide/wiki/Go-Package-Manager-Comparison" target="_blank" rel="external">《Go Package Manager Comparison》</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Glide</th>
+<th>GB</th>
+<th>Godep</th>
+<th>Govendor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semantic Versions</td>
+<td>✓</td>
+<td>✓</td>
+<td>✕</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Semantic Version Ranges</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✕</td>
+</tr>
+<tr>
+<td>Resolves dependency trees including versions</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✕</td>
+</tr>
+<tr>
+<td>Uses common range syntax (similar to PHP, JavaScript, etc)</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✕</td>
+</tr>
+<tr>
+<td>Tries to import from other package managers</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✕</td>
+</tr>
+<tr>
+<td>Copies from the GOPATH</td>
+<td>✕*</td>
+<td>✕</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Works with the go toolchain</td>
+<td>✓</td>
+<td>✕</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Locks for reproducible builds</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Allows package/version checked into VCS or installed on demand</td>
+<td>✓</td>
+<td>✓</td>
+<td>✕</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Aliased repos (e.g., using forks)</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Plugin extensibility model</td>
+<td>✓</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+</tr>
+<tr>
+<td>Supports deleting unused repos for cleanup (opt-in)</td>
+<td>✓</td>
+<td>✕</td>
+<td>✕</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>根据我们的需求和了解，选择了使用glide，当然大家也可以选择其他包管理工具。</p>
+<h3 id="glide命令"><a href="#glide命令" class="headerlink" title="glide命令"></a>glide命令</h3><p>我们来熟悉一下glide的命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 初始化glide配置</div><div class="line">glide create</div><div class="line">glide init</div><div class="line"></div><div class="line"># 添加新的包</div><div class="line">glide get [package name]</div><div class="line"></div><div class="line"># 根据glide.yaml更新包</div><div class="line">glide update</div><div class="line">glide up</div><div class="line"></div><div class="line"># 根据glide.yaml安装包</div><div class="line">glide install</div><div class="line"></div><div class="line"># 返回当前项目的名称</div><div class="line">glide name</div><div class="line"></div><div class="line"># 列出当前项目已安装的包</div><div class="line">glide list</div><div class="line"></div><div class="line"># 替换包的镜像</div><div class="line">glide mirror set [original] [replacement]</div><div class="line">glide mirror set [original] [replacement] --vcs [type]</div><div class="line"></div><div class="line"># 移除包的镜像</div><div class="line">glide mirror remove [original]</div><div class="line"></div><div class="line"># 获取包的镜像列表</div><div class="line">glide mirror list</div></pre></td></tr></table></figure>
+<p>glide mirror特别适用于不能访问一些站点，导致很Golang的依赖包不能通过go get下载的情况。可以通过配置将墙了的版本库 URL 映射到没被墙的 URL，甚至也可以映射到本地版本库。 </p>
+<p>掌握上面的命令就可以使用glide了，是不是很简单？</p>
+<h3 id="glide-yaml解析"><a href="#glide-yaml解析" class="headerlink" title="glide.yaml解析"></a>glide.yaml解析</h3><p>我们再来看一一个完整的glide.yaml的内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package: github.com/Masterminds/glide</div><div class="line">homepage: https://masterminds.github.io/glide</div><div class="line">license: MIT</div><div class="line">owners:</div><div class="line">- name: Matt Butcher</div><div class="line">  email: technosophos@gmail.com</div><div class="line">  homepage: http://technosophos.com</div><div class="line">- name: Matt Farina</div><div class="line">  email: matt@mattfarina.com</div><div class="line">  homepage: https://www.mattfarina.com</div><div class="line">ignore:</div><div class="line">- appengine</div><div class="line">excludeDirs:</div><div class="line">- node_modules</div><div class="line">import:</div><div class="line">- package: gopkg.in/yaml.v2</div><div class="line">- package: github.com/Masterminds/vcs</div><div class="line">  version: ^1.2.0</div><div class="line">  repo:    git@github.com:Masterminds/vcs</div><div class="line">  vcs:     git</div><div class="line">- package: github.com/codegangsta/cli</div><div class="line">  version: f89effe81c1ece9c5b0fda359ebd9cf65f169a51</div><div class="line">- package: github.com/Masterminds/semver</div><div class="line">  version: ^1.0.0</div><div class="line"># 测试导入包</div><div class="line">testImport:</div><div class="line">- package: github.com/arschles/assert</div></pre></td></tr></table></figure>
+<p>glide.yaml中的这些元素的解释如下：</p>
+<ul>
+<li><p><code>package</code>：顶部的 package 是它所在GOPATH的位置，glide 将从该位置下开始导包。</p>
+</li>
+<li><p><code>homepage</code>：该项目的详情页面。</p>
+</li>
+<li><p><code>license</code>：许可证标识，可以是SPDX license字符串或文件路径。</p>
+</li>
+<li><p><code>owners</code>：项目的所有者信息，便于接受漏洞信息。</p>
+</li>
+<li><p><code>ignore</code>：忽略导入的包，注意是包而不是目录。</p>
+</li>
+<li><p><code>excludeDirs</code>：排除扫描依赖的目录。</p>
+</li>
+<li><p><code>import</code>：import 的包列表：</p>
+<ul>
+<li><p><code>package</code>：导入包的名称，必填。软件包名称遵循go工具所用的相同模式。这意味着：1、映射到VCS远程位置的软件包名称以.git，.bzr，.hg或.svn结尾。 例如，example.com/foo/pkg.git/subpkg。2、GitHub, BitBucket, Launchpad, IBM Bluemix Services, and Go on Google Source是特殊情况，不需要 VCS 扩展。</p>
+</li>
+<li><p><code>version</code>：可以为semantic version, semantic version range, branch, tag 或者 commit id。</p>
+</li>
+<li><p><code>repo</code>：如果包名称不是repo位置或这是一个私人存储库，它可以去这里。 该软件包将从repo签出并放在软件包名称指定的位置。 这允许使用fork。</p>
+</li>
+<li><p><code>vcs</code>：要使用的VCS，如git，hg，bzr或svn。仅当无法从名称中检测到类型时才需要。例如，以.git或GitHub结尾的仓库可以被检测为Git。 对于Bitbucket的repo，我们可以联系API来发现类型。</p>
+</li>
+<li><p><code>subpackages</code>：在存储库中使用的包的记录。这不包括存储库中的所有包，而是包括正在使用的包。</p>
+</li>
+<li><p><code>os</code>：用于过滤的操作系统的列表。如果设置它将比较当前运行时操作系统与指定的操作系统，并且只有获取匹配的依赖。如果未设置过滤，则跳过。这些名称与构建标志和GOOS环境变量中使用的名称相同。</p>
+</li>
+<li><p><code>arch</code>：用于过滤的体系结构列表。如果设置它将比较当前运行时架构与指定的架构，并且只有在匹配时获取依赖关系。如果未设置过滤，则跳过。名称与构建标志和GOARCH环境变量中使用的名称相同。</p>
+</li>
+</ul>
+</li>
+<li><p><code>testImport</code>：在导入中未列出的测试中使用的软件包列表。每个包具有与导入下列出的相同的详细信息。</p>
+</li>
+</ul>
+<p>glide版本号指定规则如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">=: equal (aliased to no operator)</div><div class="line">!=: not equal</div><div class="line">&gt;: greater than</div><div class="line">&lt;: less than</div><div class="line">&gt;=: greater than or equal to</div><div class="line">&lt;=: less than or equal to</div><div class="line"></div><div class="line">1.2 - 1.4.5 which is equivalent to &gt;= 1.2, &lt;= 1.4.5</div><div class="line">2.3.4 - 4.5 which is equivalent to &gt;= 2.3.4, &lt;= 4.5</div><div class="line">1.2.x is equivalent to &gt;= 1.2.0, &lt; 1.3.0</div><div class="line"></div><div class="line">&gt;= 1.2.x is equivalent to &gt;= 1.2.0</div><div class="line">&lt;= 2.x is equivalent to &lt; 3</div><div class="line">* is equivalent to &gt;= 0.0.0</div><div class="line"></div><div class="line">~1.2.3 is equivalent to &gt;= 1.2.3, &lt; 1.3.0</div><div class="line">~1 is equivalent to &gt;= 1, &lt; 2</div><div class="line">~2.3 is equivalent to &gt;= 2.3, &lt; 2.4</div><div class="line">~1.2.x is equivalent to &gt;= 1.2.0, &lt; 1.3.0</div><div class="line">~1.x is equivalent to &gt;= 1, &lt; 2</div><div class="line"></div><div class="line">^1.2.3 is equivalent to &gt;= 1.2.3, &lt; 2.0.0</div><div class="line">^1.2.x is equivalent to &gt;= 1.2.0, &lt; 2.0.0</div><div class="line">^2.3 is equivalent to &gt;= 2.3, &lt; 3</div><div class="line">^2.x is equivalent to &gt;= 2.0.0, &lt; 3</div></pre></td></tr></table></figure>
+<p>要注意的是安装完成之后，会生成glide.lock文件，锁定安装包的版本。</p>
+<h3 id="参考摘录文章"><a href="#参考摘录文章" class="headerlink" title="参考摘录文章"></a>参考摘录文章</h3><ul>
+<li><a href="https://studygolang.com/articles/10453?fr=email" target="_blank" rel="external">Golang依赖管理工具：glide从入门到精通使用</a></li>
+<li><a href="https://deepzz.com/post/glide-package-management-introduce.html" target="_blank" rel="external">Golang包管理工具Glide，你值得拥有</a></li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/golang-start/" data-toggle="tooltip" data-placement="top"
+                           title="Golang学习--开篇">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAxMC83NTU5">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#包依赖工具的选择"><span class="toc-text">包依赖工具的选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glide命令"><span class="toc-text">glide命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glide-yaml解析"><span class="toc-text">glide.yaml解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考摘录文章"><span class="toc-text">参考摘录文章</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Golang,glide"
+                           title="Golang,glide">Golang,glide</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友情链接</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="http://www.cnblogs.com/CraryPrimitiveMan/">博客园博客</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/sun-yan-jun-59">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/1666866202">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100003468474677">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/craryprimitiveman">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CodeHub Inc. All Rights Reserved
+                    </br>
+                    沪ICP备17038991号
+                </p>
+                <p class="copyright text-muted"></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://craryprimitiveman.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://omp4hichz.bkt.clouddn.com/avatar.jpeg">
+</body>
+
+</html>
