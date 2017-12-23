@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="孙广君的个人博客CodeHub">
+    <meta name="keyword" content="codehub,blog">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://omp4hichz.bkt.clouddn.com/codehub.ico">
+    <link rel="alternate" type="application/atom+xml" title="CodeHub" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Golang学习--TOML配置处理｜CodeHub
+        
+    </title>
+
+    <link rel="canonical" href="http://craryprimitiveman.github.io/2017/12/golang-toml/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    CodeHub
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                        
+                            
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                            
+                        
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Golang学习--TOML配置处理</h1>
+                    
+                    <span class="meta">
+                         作者 孙广君
+                        <span>
+                          日期 2017-12-23
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Golang"
+                           title="Golang">Golang</a>
+                        
+                        <a class="tag" href="/tags/#toml"
+                           title="toml">toml</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Golang学习--TOML配置处理
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>上一篇文章中我们学会了使用包管理工具，这样我们就可以很方便的使用包管理工具来管理我们依赖的包。</p>
+<h2 id="配置工具的选择"><a href="#配置工具的选择" class="headerlink" title="配置工具的选择"></a>配置工具的选择</h2><p>但我们又遇到了一个问题，一个项目通常是有很多配置的，比如PHP的php.ini文件、Nginx的server.conf文件，那么Golang的项目又适合使用怎样的配置文件呢？</p>
+<p>其实现在我们有很多选择，比如 JSON文件、INI文件、YAML文件和TOML文件等等。</p>
+<p>其中这些文件，对应的Golang处理库如下：</p>
+<ul>
+<li><a href="https://godoc.org/encoding/json" target="_blank" rel="external">encoding/json</a> – 标准库中的包，可以处理JSON配置文件，缺点是不能加注释</li>
+<li><a href="https://github.com/go-gcfg/gcfg" target="_blank" rel="external">gcfg</a> – 处理INI配置文件</li>
+<li><a href="https://github.com/BurntSushi/toml" target="_blank" rel="external">toml</a> – 处理TOML配置文件</li>
+<li><a href="https://github.com/spf13/viper" target="_blank" rel="external">viper</a> – 处理JSON, TOML, YAML, HCL以及Java properties配置文件</li>
+</ul>
+<p>其实关于怎么选择可以看看stackoverflow上的问题<a href="https://stackoverflow.com/questions/16465705/how-to-handle-configuration-in-go" target="_blank" rel="external">How to handle configuration in Go</a>。</p>
+<h2 id="toml的使用"><a href="#toml的使用" class="headerlink" title="toml的使用"></a>toml的使用</h2><p>我根据自己的喜好选了toml，下面就来说下toml。</p>
+<p>先来看一个TOML文件的例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># This is a TOML document.</div><div class="line"></div><div class="line">title = &quot;TOML Example&quot;</div><div class="line"></div><div class="line">[owner]</div><div class="line">name = &quot;Tom Preston-Werner&quot;</div><div class="line">dob = 1979-05-27T07:32:00-08:00 # First class dates</div><div class="line"></div><div class="line">[database]</div><div class="line">server = &quot;192.168.1.1&quot;</div><div class="line">ports = [ 8001, 8001, 8002 ]</div><div class="line">connection_max = 5000</div><div class="line">enabled = true</div><div class="line"></div><div class="line">[servers]</div><div class="line"></div><div class="line">  # Indentation (tabs and/or spaces) is allowed but not required</div><div class="line">  [servers.alpha]</div><div class="line">  ip = &quot;10.0.0.1&quot;</div><div class="line">  dc = &quot;eqdc10&quot;</div><div class="line"></div><div class="line">  [servers.beta]</div><div class="line">  ip = &quot;10.0.0.2&quot;</div><div class="line">  dc = &quot;eqdc10&quot;</div><div class="line"></div><div class="line">[clients]</div><div class="line">data = [ [&quot;gamma&quot;, &quot;delta&quot;], [1, 2] ]</div><div class="line"></div><div class="line"># Line breaks are OK when inside arrays</div><div class="line">hosts = [</div><div class="line">  &quot;alpha&quot;,</div><div class="line">  &quot;omega&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>大家可以看到这里的格式非常灵活，可以是数字、字符串、布尔等简单类型，也可以是数组、map等等复杂的类型。</p>
+<p>关于具体的TOML语言的解说大家查看文档 <a href="https://github.com/toml-lang/toml" target="_blank" rel="external">toml-lang/toml</a></p>
+<p>下面我们再来说一下，具体的Golang代码中如何使用</p>
+<p>我们基于上面的配置文件来定义Golang中配置的struct，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">type tomlConfig struct &#123;</div><div class="line">	Title string</div><div class="line">	Owner ownerInfo</div><div class="line">	DB database `toml:&quot;database&quot;`</div><div class="line">	Servers map[string]server</div><div class="line">	Clients clients</div><div class="line">&#125;</div><div class="line"></div><div class="line">type ownerInfo struct &#123;</div><div class="line">	Name string</div><div class="line">	Org string `toml:&quot;organization&quot;`</div><div class="line">	Bio string</div><div class="line">	DOB time.Time</div><div class="line">&#125;</div><div class="line"></div><div class="line">type database struct &#123;</div><div class="line">	Server string</div><div class="line">	Ports []int</div><div class="line">	ConnMax int `toml:&quot;connection_max&quot;`</div><div class="line">	Enabled bool</div><div class="line">&#125;</div><div class="line"></div><div class="line">type server struct &#123;</div><div class="line">	IP string</div><div class="line">	DC string</div><div class="line">&#125;</div><div class="line"></div><div class="line">type clients struct &#123;</div><div class="line">	Data [][]interface&#123;&#125;</div><div class="line">	Hosts []string</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这一些都定义好之后，我们只需要将文件配置中的内容转成Golang中可用的struct实例即可，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var config tomlConfig</div><div class="line">filePath := &quot;/your/path/config.toml&quot;</div><div class="line">if _, err := toml.DecodeFile(filePath, &amp;config); err != nil &#123;</div><div class="line">	panic(err)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样我们拿到的config就是拥有TOML文件内容的tomlConfig的实例，可以直接使用。</p>
+<h2 id="配置的单例模式"><a href="#配置的单例模式" class="headerlink" title="配置的单例模式"></a>配置的单例模式</h2><p>通常来说，在一个项目中，配置文件只需要解析一次，所以可以使用单例模式包一下config的解析。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package config</div><div class="line"></div><div class="line">var (</div><div class="line">	cfg * tomlConfig</div><div class="line">	once sync.Once</div><div class="line">)</div><div class="line"></div><div class="line">func Config() *tomlConfig &#123;</div><div class="line">	once.Do(func() &#123;</div><div class="line">		filePath, err := filepath.Abs(&quot;./ch3/config.toml&quot;)</div><div class="line">		if err != nil &#123;</div><div class="line">			panic(err)</div><div class="line">		&#125;</div><div class="line">		fmt.Printf(&quot;parse toml file once. filePath: %s\n&quot;, filePath)</div><div class="line">		if _ , err := toml.DecodeFile(filePath, &amp;cfg); err != nil &#123;</div><div class="line">			panic(err)</div><div class="line">		&#125;</div><div class="line">	&#125;)</div><div class="line">	return cfg</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们使用了sync.Once的Do方法，Do方法当且仅当第一次被调用时才执行函数。</p>
+<p>如果once.Do(f)被多次调用，只有第一次调用会执行f，即使f每次调用Do 提供的f值不同。需要给每个要执行仅一次的函数都建立一个Once类型的实例。</p>
+<p>这样我们就保证了tomlConfig对象是一个单例模式，只需要解析一次，可以在任何地方调用。调用例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">// 配置中DB的IP</div><div class="line">fmt.Println(config.Config().DB.Server)</div><div class="line">// 配置中Owner的名字</div><div class="line">fmt.Println(config.Config().Owner.Name)</div></pre></td></tr></table></figure>
+<h2 id="配置的更新"><a href="#配置的更新" class="headerlink" title="配置的更新"></a>配置的更新</h2><p>如果我们的项目是一个常驻的项目（比如http server），我们会希望能够提供更新配置的功能，平滑的替换掉配置，不需要重启项目。</p>
+<p>其实思路很想简单，我们只需要起一个协程，监视我们定义好的信号，如果接收到信号就重新加载配置。</p>
+<p>下面我们来写下，更新配置的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">s := make(chan os.Signal, 1)</div><div class="line">signal.Notify(s, syscall.SIGUSR1)</div><div class="line">go func() &#123;</div><div class="line">	for &#123;</div><div class="line">		&lt;-s</div><div class="line">		config.ReloadConfig()</div><div class="line">		log.Println(&quot;Reloaded config&quot;)</div><div class="line">	&#125;</div><div class="line">&#125;()</div></pre></td></tr></table></figure>
+<p>我们监视了syscall.SIGUSR1信号，其值是30，接收到信号就执行config.ReloadConfig()方法。</p>
+<p>再来看下config中方法变动：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func Config() *tomlConfig &#123;</div><div class="line">	once.Do(ReloadConfig)</div><div class="line">	cfgLock.RLock()</div><div class="line">	defer cfgLock.RUnlock()</div><div class="line">	return cfg</div><div class="line">&#125;</div><div class="line"></div><div class="line">func ReloadConfig() &#123;</div><div class="line">	filePath, err := filepath.Abs(&quot;./ch3/config.toml&quot;)</div><div class="line">	if err != nil &#123;</div><div class="line">		panic(err)</div><div class="line">	&#125;</div><div class="line">	fmt.Printf(&quot;parse toml file once. filePath: %s\n&quot;, filePath)</div><div class="line">	config := new(tomlConfig)</div><div class="line">	if _ , err := toml.DecodeFile(filePath, config); err != nil &#123;</div><div class="line">		panic(err)</div><div class="line">	&#125;</div><div class="line">	cfgLock.Lock()</div><div class="line">	defer cfgLock.Unlock()</div><div class="line">	cfg = config</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原来加载配置的代码放到ReloadConfig方法中去了，还在给变量cfg赋值的时候加了读写锁，以保证安全。在Config方法中获取cfg的时候加了读锁，防止在读的时候，也在写入，导致配置错乱。</p>
+<p>启动server之后，可以通过如下shell命令更新配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">kill -30 6666</div></pre></td></tr></table></figure>
+<p>其中的6666是go server的进程号。执行这条命令之后，会向go server发送syscall.SIGUSR1的信号，从而触发更新配置的动作。</p>
+<h2 id="POSIX信号"><a href="#POSIX信号" class="headerlink" title="POSIX信号"></a>POSIX信号</h2><p>这边顺便列一下POSIX中定义的信号：</p>
+<p>Linux 使用34-64信号用作实时系统中。</p>
+<p>命令 man 7 signal 提供了官方的信号介绍。</p>
+<h4 id="在POSIX-1-1990标准中定义的信号列表："><a href="#在POSIX-1-1990标准中定义的信号列表：" class="headerlink" title="在POSIX.1-1990标准中定义的信号列表："></a>在POSIX.1-1990标准中定义的信号列表：</h4><table>
+<thead>
+<tr>
+<th>信号</th>
+<th>值</th>
+<th>动作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIGHUP</td>
+<td>1</td>
+<td>Term</td>
+<td>终端控制进程结束(终端连接断开)</td>
+</tr>
+<tr>
+<td>SIGINT</td>
+<td>2</td>
+<td>Term</td>
+<td>用户发送INTR字符(Ctrl+C)触发</td>
+</tr>
+<tr>
+<td>SIGQUIT</td>
+<td>3</td>
+<td>Core</td>
+<td>用户发送QUIT字符(Ctrl+/)触发</td>
+</tr>
+<tr>
+<td>SIGILL</td>
+<td>4</td>
+<td>Core</td>
+<td>非法指令(程序错误、试图执行数据段、栈溢出等)</td>
+</tr>
+<tr>
+<td>SIGABRT</td>
+<td>6</td>
+<td>Core</td>
+<td>调用abort函数触发</td>
+</tr>
+<tr>
+<td>SIGFPE</td>
+<td>8</td>
+<td>Core</td>
+<td>算术运行错误(浮点运算错误、除数为零等)</td>
+</tr>
+<tr>
+<td>SIGKILL</td>
+<td>9</td>
+<td>Term</td>
+<td>无条件结束程序(不能被捕获、阻塞或忽略)</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>11</td>
+<td>Core</td>
+<td>无效内存引用(试图访问不属于自己的内存空间、对只读内存空间进行写操作)</td>
+</tr>
+<tr>
+<td>SIGPIPE</td>
+<td>13</td>
+<td>Term</td>
+<td>消息管道损坏(FIFO/Socket通信时，管道未打开而进行写操作)</td>
+</tr>
+<tr>
+<td>SIGALRM</td>
+<td>14</td>
+<td>Term</td>
+<td>时钟定时信号</td>
+</tr>
+<tr>
+<td>SIGTERM</td>
+<td>15</td>
+<td>Term</td>
+<td>结束程序(可以被捕获、阻塞或忽略)</td>
+</tr>
+<tr>
+<td>SIGUSR1</td>
+<td>30,10,16</td>
+<td>Term</td>
+<td>用户保留</td>
+</tr>
+<tr>
+<td>SIGUSR2</td>
+<td>31,12,17</td>
+<td>Term</td>
+<td>用户保留</td>
+</tr>
+<tr>
+<td>SIGCHLD</td>
+<td>20,17,18</td>
+<td>Ign</td>
+<td>子进程结束(由父进程接收)</td>
+</tr>
+<tr>
+<td>SIGCONT</td>
+<td>19,18,25</td>
+<td>Cont</td>
+<td>继续执行已经停止的进程(不能被阻塞)</td>
+</tr>
+<tr>
+<td>SIGSTOP</td>
+<td>17,19,23</td>
+<td>Stop</td>
+<td>停止进程(不能被捕获、阻塞或忽略)</td>
+</tr>
+<tr>
+<td>SIGTSTP</td>
+<td>18,20,24</td>
+<td>Stop</td>
+<td>停止进程(可以被捕获、阻塞或忽略)</td>
+</tr>
+<tr>
+<td>SIGTTIN</td>
+<td>21,21,26</td>
+<td>Stop</td>
+<td>后台程序从终端中读取数据时触发</td>
+</tr>
+<tr>
+<td>SIGTTOU</td>
+<td>22,22,27</td>
+<td>Stop</td>
+<td>后台程序向终端中写数据时触发</td>
+</tr>
+</tbody>
+</table>
+<h4 id="在SUSv2和POSIX-1-2001标准中的信号列表"><a href="#在SUSv2和POSIX-1-2001标准中的信号列表" class="headerlink" title="在SUSv2和POSIX.1-2001标准中的信号列表:"></a>在SUSv2和POSIX.1-2001标准中的信号列表:</h4><table>
+<thead>
+<tr>
+<th>信号</th>
+<th>值</th>
+<th>动作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIGTRAP</td>
+<td>5</td>
+<td>Core</td>
+<td>Trap指令触发(如断点，在调试器中使用)</td>
+</tr>
+<tr>
+<td>SIGBUS</td>
+<td>0,7,10</td>
+<td>Core</td>
+<td>非法地址(内存地址对齐错误)</td>
+</tr>
+<tr>
+<td>SIGPOLL</td>
+<td></td>
+<td>Term</td>
+<td>Pollable event (Sys V). Synonym for SIGIO</td>
+</tr>
+<tr>
+<td>SIGPROF</td>
+<td>27,27,29</td>
+<td>Term</td>
+<td>性能时钟信号(包含系统调用时间和进程占用CPU的时间)</td>
+</tr>
+<tr>
+<td>SIGSYS</td>
+<td>12,31,12</td>
+<td>Core</td>
+<td>无效的系统调用(SVr4)</td>
+</tr>
+<tr>
+<td>SIGURG</td>
+<td>16,23,21</td>
+<td>Ign</td>
+<td>有紧急数据到达Socket(4.2BSD)</td>
+</tr>
+<tr>
+<td>SIGVTALRM</td>
+<td>26,26,28</td>
+<td>Term</td>
+<td>虚拟时钟信号(进程占用CPU的时间)(4.2BSD)</td>
+</tr>
+<tr>
+<td>SIGXCPU</td>
+<td>24,24,30</td>
+<td>Core</td>
+<td>超过CPU时间资源限制(4.2BSD)</td>
+</tr>
+<tr>
+<td>SIGXFSZ</td>
+<td>25,25,31</td>
+<td>Core</td>
+<td>超过文件大小资源限制(4.2BSD)</td>
+</tr>
+</tbody>
+</table>
+<p>代码可参考：<a href="https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch3" target="_blank" rel="external">https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch3</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://blog.ralch.com/tutorial/design-patterns/golang-singleton/" target="_blank" rel="external">Design Patterns in Golang: Singleton</a><br><a href="http://openmymind.net/Golang-Hot-Configuration-Reload/" target="_blank" rel="external">Golang hot configuration reload</a><br><a href="https://www.cnblogs.com/jkkkk/p/6180016.html" target="_blank" rel="external">Golang中的信号处理</a></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/12/golang-glide/" data-toggle="tooltip" data-placement="top"
+                           title="Golang学习--包管理工具glide">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAxMC83NTU5">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置工具的选择"><span class="toc-text">配置工具的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#toml的使用"><span class="toc-text">toml的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置的单例模式"><span class="toc-text">配置的单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置的更新"><span class="toc-text">配置的更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POSIX信号"><span class="toc-text">POSIX信号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在POSIX-1-1990标准中定义的信号列表："><span class="toc-text">在POSIX.1-1990标准中定义的信号列表：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在SUSv2和POSIX-1-2001标准中的信号列表"><span class="toc-text">在SUSv2和POSIX.1-2001标准中的信号列表:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Golang"
+                           title="Golang">Golang</a>
+                        
+                        <a class="tag" href="/tags/#toml"
+                           title="toml">toml</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友情链接</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="http://www.cnblogs.com/CraryPrimitiveMan/">博客园博客</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/sun-yan-jun-59">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/1666866202">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100003468474677">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/craryprimitiveman">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CodeHub Inc. All Rights Reserved
+                    </br>
+                    沪ICP备17038991号
+                </p>
+                <p class="copyright text-muted"></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://craryprimitiveman.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://omp4hichz.bkt.clouddn.com/avatar.jpeg">
+</body>
+
+</html>
