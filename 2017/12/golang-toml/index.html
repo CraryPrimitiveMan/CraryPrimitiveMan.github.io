@@ -216,7 +216,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">func Config() *tomlConfig &#123;</div><div class="line">	once.Do(ReloadConfig)</div><div class="line">	cfgLock.RLock()</div><div class="line">	defer cfgLock.RUnlock()</div><div class="line">	return cfg</div><div class="line">&#125;</div><div class="line"></div><div class="line">func ReloadConfig() &#123;</div><div class="line">	filePath, err := filepath.Abs(&quot;./ch3/config.toml&quot;)</div><div class="line">	if err != nil &#123;</div><div class="line">		panic(err)</div><div class="line">	&#125;</div><div class="line">	fmt.Printf(&quot;parse toml file once. filePath: %s\n&quot;, filePath)</div><div class="line">	config := new(tomlConfig)</div><div class="line">	if _ , err := toml.DecodeFile(filePath, config); err != nil &#123;</div><div class="line">		panic(err)</div><div class="line">	&#125;</div><div class="line">	cfgLock.Lock()</div><div class="line">	defer cfgLock.Unlock()</div><div class="line">	cfg = config</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>原来加载配置的代码放到ReloadConfig方法中去了，还在给变量cfg赋值的时候加了读写锁，以保证安全。在Config方法中获取cfg的时候加了读锁，防止在读的时候，也在写入，导致配置错乱。</p>
 <p>启动server之后，可以通过如下shell命令更新配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">kill -30 6666</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">kill -SIGUSR1 6666</div></pre></td></tr></table></figure>
 <p>其中的6666是go server的进程号。执行这条命令之后，会向go server发送syscall.SIGUSR1的信号，从而触发更新配置的动作。</p>
 <h2 id="POSIX信号"><a href="#POSIX信号" class="headerlink" title="POSIX信号"></a>POSIX信号</h2><p>这边顺便列一下POSIX中定义的信号：</p>
 <p>Linux 使用34-64信号用作实时系统中。</p>
