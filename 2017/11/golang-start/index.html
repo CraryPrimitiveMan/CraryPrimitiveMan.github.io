@@ -186,7 +186,7 @@
 <p>我们先来实现最简单的页面，展示Hello World的文字，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">	&quot;net/http&quot;</div><div class="line">	&quot;log&quot;</div><div class="line">	&quot;fmt&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func hello(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">	fmt.Fprintln(w, &quot;Hello World!&quot;) // 写入到w的是输出到客户端的</div><div class="line">&#125;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	http.HandleFunc(&quot;/&quot;, hello) // 设置访问的路由</div><div class="line">	err := http.ListenAndServe(&quot;:9090&quot;, nil) // 设置监听的端口</div><div class="line">	if err != nil &#123;</div><div class="line">		log.Fatal(&quot;ListenAndServe: &quot;, err)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>访问URL <a href="http://localhost:9090" target="_blank" rel="external">http://localhost:9090</a> ，就可以看到如下页面</p>
-<p><img src="http://images2017.cnblogs.com/blog/587057/201711/587057-20171113165301687-1544241763.png" alt=""></p>
+<p><img src="/images/golang-start-1.png" alt=""></p>
 <p>这样我们就完成了go最基础的两个示例。</p>
 <p>代码可参考：<a href="https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch1" target="_blank" rel="external">https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch1</a></p>
 <p>这个系列不打算讲go的基本语法，想要学习的话，可以查看<a href="https://learnxinyminutes.com/docs/zh-cn/go-cn/" target="_blank" rel="external">X分钟速成Golang</a></p>
