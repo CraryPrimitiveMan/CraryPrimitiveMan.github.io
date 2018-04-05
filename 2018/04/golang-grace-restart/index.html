@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="孙广君的个人博客CodeHub">
+    <meta name="keyword" content="codehub,blog">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="http://omp4hichz.bkt.clouddn.com/codehub.ico">
+    <link rel="alternate" type="application/atom+xml" title="CodeHub" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Golang学习--平滑重启｜CodeHub
+        
+    </title>
+
+    <link rel="canonical" href="http://craryprimitiveman.github.io/2018/04/golang-grace-restart/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    CodeHub
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                        
+                            
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                            
+                        
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://omp4hichz.bkt.clouddn.com/codehub/slide.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Golang学习--平滑重启</h1>
+                    
+                    <span class="meta">
+                         作者 孙广君
+                        <span>
+                          日期 2018-04-05
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Golang"
+                           title="Golang">Golang</a>
+                        
+                        <a class="tag" href="/tags/#graceful restart"
+                           title="graceful restart">graceful restart</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Golang学习--平滑重启
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在上一篇博客介绍TOML配置的时候，讲到了通过信号通知重载配置。我们在这一篇中介绍下如何的平滑重启server。</p>
+<p>与重载配置相同的是我们也需要通过信号来通知server重启，但关键在于平滑重启，如果只是简单的重启，只需要kill掉，然后再拉起即可。平滑重启意味着server升级的时候可以不用停止业务。</p>
+<p>我们先来看下Github上有没有相应的库解决这个问题，然后找到了如下三个库：</p>
+<ul>
+<li><a href="https://github.com/facebookgo/grace" target="_blank" rel="external">facebookgo/grace</a> - Graceful restart &amp; zero downtime deploy for Go servers.</li>
+<li><a href="https://github.com/fvbock/endless" target="_blank" rel="external">fvbock/endless</a> - Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)</li>
+<li><a href="https://github.com/jpillora/overseer" target="_blank" rel="external">jpillora/overseer</a> - Monitorable, gracefully restarting, self-upgrading binaries in Go (golang)</li>
+</ul>
+<p>我们分别来学习一下，下面只讲解http server的重启。</p>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>我们来分别使用这三个库来做平滑重启的事情，之后来对比其优缺点。</p>
+<p>这三个库的官方都给了相应的例子，例子如下：</p>
+<p>但三个库官方的例子不太一致，我们来统一一下：</p>
+<ul>
+<li>grace例子 <a href="https://github.com/facebookgo/grace/blob/master/gracedemo/demo.go" target="_blank" rel="external">https://github.com/facebookgo/grace/blob/master/gracedemo/demo.go</a></li>
+<li>endless例子 <a href="https://github.com/fvbock/endless/tree/master/examples" target="_blank" rel="external">https://github.com/fvbock/endless/tree/master/examples</a></li>
+<li>overseer例子 <a href="https://github.com/jpillora/overseer/tree/master/example" target="_blank" rel="external">https://github.com/jpillora/overseer/tree/master/example</a></li>
+</ul>
+<p>我们参考官方的例子分别来写下用来对比的例子：</p>
+<h3 id="grace"><a href="#grace" class="headerlink" title="grace"></a>grace</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">	&quot;time&quot;</div><div class="line">	&quot;net/http&quot;</div><div class="line">	&quot;github.com/facebookgo/grace/gracehttp&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	gracehttp.Serve(</div><div class="line">		&amp;http.Server&#123;Addr: &quot;:5001&quot;, Handler: newGraceHandler()&#125;,</div><div class="line">		&amp;http.Server&#123;Addr: &quot;:5002&quot;, Handler: newGraceHandler()&#125;,</div><div class="line">	)</div><div class="line">&#125;</div><div class="line"></div><div class="line">func newGraceHandler() http.Handler &#123;</div><div class="line">	mux := http.NewServeMux()</div><div class="line">	mux.HandleFunc(&quot;/sleep&quot;, func(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">		duration, err := time.ParseDuration(r.FormValue(&quot;duration&quot;))</div><div class="line">		if err != nil &#123;</div><div class="line">			http.Error(w, err.Error(), 400)</div><div class="line">			return</div><div class="line">		&#125;</div><div class="line">		time.Sleep(duration)</div><div class="line">		w.Write([]byte(&quot;Hello World&quot;))</div><div class="line">	&#125;)</div><div class="line">	return mux</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="endless"><a href="#endless" class="headerlink" title="endless"></a>endless</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">	&quot;log&quot;</div><div class="line">	&quot;net/http&quot;</div><div class="line">	&quot;os&quot;</div><div class="line">	&quot;sync&quot;</div><div class="line">	&quot;time&quot;</div><div class="line"></div><div class="line">	&quot;github.com/fvbock/endless&quot;</div><div class="line">	&quot;github.com/gorilla/mux&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func handler(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">	duration, err := time.ParseDuration(r.FormValue(&quot;duration&quot;))</div><div class="line">	if err != nil &#123;</div><div class="line">		http.Error(w, err.Error(), 400)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	time.Sleep(duration)</div><div class="line">	w.Write([]byte(&quot;Hello World&quot;))</div><div class="line">&#125;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	mux1 := mux.NewRouter()</div><div class="line">	mux1.HandleFunc(&quot;/sleep&quot;, handler)</div><div class="line"></div><div class="line">	w := sync.WaitGroup&#123;&#125;</div><div class="line">	w.Add(2)</div><div class="line">	go func() &#123;</div><div class="line">		err := endless.ListenAndServe(&quot;:5003&quot;, mux1)</div><div class="line">		if err != nil &#123;</div><div class="line">			log.Println(err)</div><div class="line">		&#125;</div><div class="line">		log.Println(&quot;Server on 5003 stopped&quot;)</div><div class="line">		w.Done()</div><div class="line">	&#125;()</div><div class="line">	go func() &#123;</div><div class="line">		err := endless.ListenAndServe(&quot;:5004&quot;, mux1)</div><div class="line">		if err != nil &#123;</div><div class="line">			log.Println(err)</div><div class="line">		&#125;</div><div class="line">		log.Println(&quot;Server on 5004 stopped&quot;)</div><div class="line">		w.Done()</div><div class="line">	&#125;()</div><div class="line">	w.Wait()</div><div class="line">	log.Println(&quot;All servers stopped. Exiting.&quot;)</div><div class="line"></div><div class="line">	os.Exit(0)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="overseer"><a href="#overseer" class="headerlink" title="overseer"></a>overseer</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">	&quot;fmt&quot;</div><div class="line">	&quot;net/http&quot;</div><div class="line">	&quot;time&quot;</div><div class="line"></div><div class="line">	&quot;github.com/jpillora/overseer&quot;</div><div class="line">)</div><div class="line"></div><div class="line">//see example.sh for the use-case</div><div class="line"></div><div class="line">// BuildID is compile-time variable</div><div class="line">var BuildID = &quot;0&quot;</div><div class="line"></div><div class="line">//convert your &apos;main()&apos; into a &apos;prog(state)&apos;</div><div class="line">//&apos;prog()&apos; is run in a child process</div><div class="line">func prog(state overseer.State) &#123;</div><div class="line">	fmt.Printf(&quot;app#%s (%s) listening...\n&quot;, BuildID, state.ID)</div><div class="line">	http.Handle(&quot;/&quot;, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">		duration, err := time.ParseDuration(r.FormValue(&quot;duration&quot;))</div><div class="line">		if err != nil &#123;</div><div class="line">			http.Error(w, err.Error(), 400)</div><div class="line">			return</div><div class="line">		&#125;</div><div class="line">		time.Sleep(duration)</div><div class="line">		w.Write([]byte(&quot;Hello World&quot;))</div><div class="line">		fmt.Fprintf(w, &quot;app#%s (%s) says hello\n&quot;, BuildID, state.ID)</div><div class="line">	&#125;))</div><div class="line">	http.Serve(state.Listener, nil)</div><div class="line">	fmt.Printf(&quot;app#%s (%s) exiting...\n&quot;, BuildID, state.ID)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//then create another &apos;main&apos; which runs the upgrades</div><div class="line">//&apos;main()&apos; is run in the initial process</div><div class="line">func main() &#123;</div><div class="line">	overseer.Run(overseer.Config&#123;</div><div class="line">		Program: prog,</div><div class="line">		Addresses: []string&#123;&quot;:5005&quot;, &quot;:5006&quot;&#125;,</div><div class="line">		//Fetcher: &amp;fetcher.File&#123;Path: &quot;my_app_next&quot;&#125;,</div><div class="line">		Debug:   false, //display log of overseer actions</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><h3 id="对比示例的操作步骤"><a href="#对比示例的操作步骤" class="headerlink" title="对比示例的操作步骤"></a>对比示例的操作步骤</h3><ul>
+<li>分别构建上面的示例，并记录pid</li>
+<li>调用API，在其未返回时，修改内容(Hello World -&gt; Hello Harry)，重新构建。查看旧API是否返回旧的内容</li>
+<li>调用新API，查看返回的内容是否是新的内容</li>
+<li>查看当前运行的pid，是否与之前一致</li>
+</ul>
+<p>下面给一下操作命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">#</span> 第一次构建项目</div><div class="line">go build grace.go</div><div class="line"><span class="meta">#</span> 运行项目，这时就可以做内容修改了</div><div class="line">./grace &amp;</div><div class="line"><span class="meta">#</span> 请求项目，60s后返回</div><div class="line">curl "http://127.0.0.1:5001/sleep?duration=60s" &amp;</div><div class="line"><span class="meta">#</span> 再次构建项目，这里是新内容</div><div class="line">go build grace.go</div><div class="line"><span class="meta">#</span> 重启，2096为pid</div><div class="line">kill -USR2 2096</div><div class="line"><span class="meta">#</span> 新API请求</div><div class="line">curl "http://127.0.0.1:5001/sleep?duration=1s"</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#</span> 第一次构建项目</div><div class="line">go build endless.go</div><div class="line"><span class="meta">#</span> 运行项目，这时就可以做内容修改了</div><div class="line">./endless &amp;</div><div class="line"><span class="meta">#</span> 请求项目，60s后返回</div><div class="line">curl "http://127.0.0.1:5003/sleep?duration=60s" &amp;</div><div class="line"><span class="meta">#</span> 再次构建项目，这里是新内容</div><div class="line">go build endless.go</div><div class="line"><span class="meta">#</span> 重启，22072为pid</div><div class="line">kill -1 22072</div><div class="line"><span class="meta">#</span> 新API请求</div><div class="line">curl "http://127.0.0.1:5003/sleep?duration=1s"</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#</span> 第一次构建项目</div><div class="line">go build -ldflags '-X main.BuildID=1' overseer.go</div><div class="line"><span class="meta">#</span> 运行项目，这时就可以做内容修改了</div><div class="line">./overseer &amp;</div><div class="line"><span class="meta">#</span> 请求项目，60s后返回</div><div class="line">curl "http://127.0.0.1:5005/sleep?duration=60s" &amp;</div><div class="line"><span class="meta">#</span> 再次构建项目，这里是新内容，注意版本号不同了</div><div class="line">go build -ldflags '-X main.BuildID=2' overseer.go</div><div class="line"><span class="meta">#</span> 重启，28300为主进程pid</div><div class="line">kill -USR2 28300</div><div class="line"><span class="meta">#</span> 新API请求</div><div class="line">curl "http://127.0.0.1:5005/sleep?duration=1s"</div></pre></td></tr></table></figure>
+<h3 id="对比结果"><a href="#对比结果" class="headerlink" title="对比结果"></a>对比结果</h3><table>
+<thead>
+<tr>
+<th>示例</th>
+<th>chong qichongqi</th>
+<th>旧API返回值</th>
+<th>新API返回值</th>
+<th>旧pid</th>
+<th>新pid</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grace</td>
+<td>Hello world</td>
+<td>Hello Harry</td>
+<td>2096</td>
+<td>3100</td>
+<td>旧API不会断掉，会执行原来的逻辑，pid会变化</td>
+</tr>
+<tr>
+<td>endless</td>
+<td>Hello world</td>
+<td>Hello Harry</td>
+<td>22072</td>
+<td>22365</td>
+<td>旧API不会断掉，会执行原来的逻辑，pid会变化</td>
+</tr>
+<tr>
+<td>overseer</td>
+<td>Hello world</td>
+<td>Hello Harry</td>
+<td>28300</td>
+<td>28300</td>
+<td>旧API不会断掉，会执行原来的逻辑，主进程pid不会变化</td>
+</tr>
+</tbody>
+</table>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>可以看出grace和endless是比较像的。</p>
+<ul>
+<li>监听信号</li>
+<li>收到信号时fork子进程（使用相同的启动命令），将服务监听的socket文件描述符传递给子进程</li>
+<li>子进程监听父进程的socket，这个时候父进程和子进程都可以接收请求</li>
+<li>子进程启动成功之后，父进程停止接收新的连接，等待旧连接处理完成（或超时）</li>
+<li>父进程退出，升级完成</li>
+</ul>
+<p>overseer是不同的，主要是overseer加了一个主进程管理平滑重启，子进程处理链接，能够保持主进程pid不变。</p>
+<p>如下图表示的很形象</p>
+<p><img src="https://images2018.cnblogs.com/blog/587057/201804/587057-20180405165913936-1616400153.png" alt=""></p>
+<p>代码可参考：<a href="https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch4" target="_blank" rel="external">https://github.com/CraryPrimitiveMan/go-in-action/tree/master/ch4</a></p>
+<p>关于这一部分，个人的理解也不是特别深入，如果又不正确的地方请大家指正。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/black_OX/article/details/77869500?locationNum=9&amp;fps=1" target="_blank" rel="external">热重启golang服务器</a></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/12/golang-toml/" data-toggle="tooltip" data-placement="top"
+                           title="Golang学习--TOML配置处理">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTAxMC83NTU5">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#grace"><span class="toc-text">grace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#endless"><span class="toc-text">endless</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overseer"><span class="toc-text">overseer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对比示例的操作步骤"><span class="toc-text">对比示例的操作步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比结果"><span class="toc-text">对比结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理分析"><span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">标签</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Golang"
+                           title="Golang">Golang</a>
+                        
+                        <a class="tag" href="/tags/#graceful restart"
+                           title="graceful restart">graceful restart</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">友情链接</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="http://www.cnblogs.com/CraryPrimitiveMan/">博客园博客</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/sun-yan-jun-59">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/1666866202">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100003468474677">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/craryprimitiveman">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CodeHub Inc. All Rights Reserved
+                    </br>
+                    沪ICP备17038991号
+                </p>
+                <p class="copyright text-muted"></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://craryprimitiveman.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://omp4hichz.bkt.clouddn.com/avatar.jpeg">
+<div align="center" style="display: none">
+    <img border="0" src="http://cc.amazingcounters.com/counter.php?i=3221323&c=9664282" alt="AmazingCounters.com">
+</div>
+</body>
+
+</html>
