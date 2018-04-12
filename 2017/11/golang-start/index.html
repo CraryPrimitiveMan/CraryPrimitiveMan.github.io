@@ -178,11 +178,11 @@
                 <p>最近开始接收一个新项目，是使用Golang写的，需要重新捡起Golang来，于是就有了这个系列博客。</p>
 <p>Golang的环境配置，我就不说了，让我们直接开始。</p>
 <p>Golang官网：<a href="https://golang.org" target="_blank" rel="external">https://golang.org</a><br>Golang标准库文档：<a href="https://golang.org/pkg" target="_blank" rel="external">https://golang.org/pkg</a><br>Golang中文标准库文档：<a href="https://studygolang.com/pkgdoc" target="_blank" rel="external">https://studygolang.com/pkgdoc</a></p>
-<p>下面我们先来执行一个Hello World，代码如下：</p>
+<h2 id="基础项目"><a href="#基础项目" class="headerlink" title="基础项目"></a>基础项目</h2><p>下面我们先来执行一个Hello World，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import &quot;fmt&quot;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	fmt.Println(&quot;Hello World&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>编译执行，输出</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Hello World</div></pre></td></tr></table></figure>
-<p>我们再来使用go启动一个web server，大家通过浏览器可以访问到相应的页面</p>
+<h2 id="Web项目"><a href="#Web项目" class="headerlink" title="Web项目"></a>Web项目</h2><p>我们再来使用go启动一个web server，大家通过浏览器可以访问到相应的页面</p>
 <p>我们先来实现最简单的页面，展示Hello World的文字，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">	&quot;net/http&quot;</div><div class="line">	&quot;log&quot;</div><div class="line">	&quot;fmt&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func hello(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">	fmt.Fprintln(w, &quot;Hello World!&quot;) // 写入到w的是输出到客户端的</div><div class="line">&#125;</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">	http.HandleFunc(&quot;/&quot;, hello) // 设置访问的路由</div><div class="line">	err := http.ListenAndServe(&quot;:9090&quot;, nil) // 设置监听的端口</div><div class="line">	if err != nil &#123;</div><div class="line">		log.Fatal(&quot;ListenAndServe: &quot;, err)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>访问URL <a href="http://localhost:9090" target="_blank" rel="external">http://localhost:9090</a> ，就可以看到如下页面</p>
@@ -241,7 +241,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#许可"><span class="toc-text">许可</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础项目"><span class="toc-text">基础项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web项目"><span class="toc-text">Web项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#许可"><span class="toc-text">许可</span></a></li></ol>
                 </div>
             </div>
         </div>
