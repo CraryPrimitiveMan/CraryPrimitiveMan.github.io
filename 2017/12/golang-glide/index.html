@@ -281,6 +281,13 @@
 </tbody>
 </table>
 <p>根据我们的需求和了解，选择了使用glide，当然大家也可以选择其他包管理工具。</p>
+<p>现在官方也出了包管理工具dep，感兴趣的可以查看这篇文章<a href="https://gocn.io/article/414" target="_blank" rel="external">《官方依赖管理工具：dep》</a></p>
+<p>为什么我们不选择dep，而使用glide，有以下两点原因：</p>
+<ol>
+<li>我们需要支持VCS，dep暂时不支持</li>
+<li>dep需要翻墙</li>
+</ol>
+<p>当然如果这两点对你来说不是问题的话，我也推荐大家使用dep</p>
 <h3 id="glide命令"><a href="#glide命令" class="headerlink" title="glide命令"></a>glide命令</h3><p>我们来熟悉一下glide的命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 初始化glide配置</div><div class="line">glide create</div><div class="line">glide init</div><div class="line"></div><div class="line"># 添加新的包</div><div class="line">glide get [package name]</div><div class="line"></div><div class="line"># 根据glide.yaml更新包</div><div class="line">glide update</div><div class="line">glide up</div><div class="line"></div><div class="line"># 根据glide.yaml安装包</div><div class="line">glide install</div><div class="line"></div><div class="line"># 返回当前项目的名称</div><div class="line">glide name</div><div class="line"></div><div class="line"># 列出当前项目已安装的包</div><div class="line">glide list</div><div class="line"></div><div class="line"># 替换包的镜像</div><div class="line">glide mirror set [original] [replacement]</div><div class="line">glide mirror set [original] [replacement] --vcs [type]</div><div class="line"></div><div class="line"># 移除包的镜像</div><div class="line">glide mirror remove [original]</div><div class="line"></div><div class="line"># 获取包的镜像列表</div><div class="line">glide mirror list</div></pre></td></tr></table></figure>
 <p>glide mirror特别适用于不能访问一些站点，导致很Golang的依赖包不能通过go get下载的情况。可以通过配置将墙了的版本库 URL 映射到没被墙的 URL，甚至也可以映射到本地版本库。 </p>
