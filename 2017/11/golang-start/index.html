@@ -281,7 +281,7 @@
 
 <!-- gitment 公共JS代码 start (一个网页只需插入一次) -->
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="/js/gitment.browser.js"></script>
 <script>
     var gitment = new Gitment({
         id: window.document.location.pathname, // 可选。默认为location.href
@@ -293,6 +293,7 @@
         },
     })
     gitment.render('container')
+    //$('.gitment-editor-write-field > textarea').keyup(function(e, i){console.log(e.target.value.substring(e.target.value.length -1))})
 </script>
 <!-- gitment 公共JS代码 end -->
 
