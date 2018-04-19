@@ -4404,9 +4404,6 @@ var Gitment = function () {
       return this.getIssue().then(function (issue) {
         return _utils.http.get(issue.comments_url, { page: page, per_page: _this8.perPage }, '');
       }).then(function (comments) {
-        comments.forEach(function (comment) {
-          self.state.users[comment.user.login] = comment.author_association != "NONE";
-        });
         _this8.state.comments = comments;
         return comments;
       });
@@ -4457,6 +4454,7 @@ var Gitment = function () {
 
       var comments = this.state.comments;
       var comentReactions = {};
+      var users = {};
 
       return Promise.all(comments.map(function (comment) {
         if (!comment.reactions.total_count) return [];
@@ -4469,7 +4467,11 @@ var Gitment = function () {
         comments.forEach(function (comment, index) {
           comentReactions[comment.id] = reactionsArray[index];
         });
+        comments.forEach(function (comment) {
+          users[comment.user.login] = comment.author_association != "NONE";
+        });
         _this11.state.commentReactions = comentReactions;
+        _this11.state.users = users;
 
         return comentReactions;
       });
