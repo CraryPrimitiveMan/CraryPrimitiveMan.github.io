@@ -139,6 +139,7 @@ var Gitment = function () {
     } else {
       this.update();
     }
+    this.addKeyPressListener();
   }
 
   _createClass(Gitment, [{
@@ -150,7 +151,6 @@ var Gitment = function () {
         return _this2.loadComments();
       }).then(function (comments) {
         _this2.state.error = null;
-        _this2.addKeyPressListener();
         return comments;
       });
     }
