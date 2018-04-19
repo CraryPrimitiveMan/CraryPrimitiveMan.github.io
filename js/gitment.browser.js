@@ -4284,7 +4284,7 @@ var Gitment = function () {
       // 获取父节点，并为它添加一个click事件
       document.getElementById('container').addEventListener('keypress', function (e) {
         // 检查事件源e.targe是否为Li
-        if (e.target && e.target.nodeName.toUpperCase == "TEXTAREA") {
+        if (e.target && e.target.nodeName.toUpperCase() == "TEXTAREA") {
           var content = e.target.value;
           if (content != "") {
             if (content.substring(len(content) - 1) === '@') {
