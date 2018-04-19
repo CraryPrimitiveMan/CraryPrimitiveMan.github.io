@@ -4405,7 +4405,7 @@ var Gitment = function () {
         return _utils.http.get(issue.comments_url, { page: page, per_page: _this8.perPage }, '');
       }).then(function (comments) {
         comments.forEach(function (comment) {
-          self.state.users[comment.login] = comment.author_association != "NONE";
+          self.state.users[comment.user.login] = comment.author_association != "NONE";
         });
         _this8.state.comments = comments;
         return comments;
